@@ -1,0 +1,152 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum StudentRole {
+    SILVER
+    GOLD
+    PLATINUM
+}
+
+enum Subject {
+    MATH
+    HISTORY
+    SOCCER
+}
+
+enum AdminRole {
+    ADMIN
+    DEVELOPER
+    POSTER
+}
+
+model Student {
+    id             String         @id @default(uuid())
+    firstName      String
+    lastName       String
+    email          String         @unique
+    email_verified Boolean?
+    gender         String?
+    birthday       String?
+    address        String?
+    phone          String?
+    city           String?
+    province       String?
+    country        String?
+    photo          String
+    role           StudentRole    @default(SILVER)
+    active         Boolean        @default(true)
+    createdAt      DateTime       @default(now())
+    updatedAt      DateTime       @updatedAt
+    courses        Course[]
+}
+
+model Teacher {
+    id             String         @id @default(uuid())
+    firstName      String?
+    lastName       String?
+    email          String?        @unique
+    email_verified Boolean?
+    gender         String?
+    birthday       String?
+    address        String?
+    phone          String?
+    city           String?
+    province       String?
+    country        String?
+    photo          String?
+    role           Subject?           
+    active         Boolean        @default(true)
+    createdAt      DateTime       @default(now())
+    updatedAt      DateTime       @updatedAt
+    courses        Course[]
+}
+
+model Course {
+    id          String     @id @default(uuid())
+    name        String?
+    photo       String?
+    active      Boolean
+    description String?
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+    subject     Subject?
+    teacher     Teacher[]
+    teacherId   String?
+    students    Student[]
+}
+
+model Admin {
+    id             String         @id @default(uuid())
+    firstName      String?
+    lastName       String?
+    email          String?        @unique
+    email_verified Boolean?
+    gender         String?
+    birthday       String?
+    address        String?
+    phone          String?
+    city           String?
+    province       String?
+    country        String?
+    photo          String?
+    role           AdminRole?           
+    active         Boolean        @default(true)
+    createdAt      DateTime       @default(now())
+    updatedAt      DateTime       @updatedAt
+    posts          Post[] @relation(fields: [id], references: [id])
+}
+
+model Post {
+    id              String      @id @default(uuid())
+    name            String
+    contact         String
+    address         String?
+    description     String
+    photo           String
+    active          Boolean
+    adminId         String?
+}
+
+model Transaction {
+    id        String     @id @default(uuid())
+    amount    Float
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+    studentId String?
+    quantity  Quantity[]
+    status    STATUS     @default(PROCESSING_PAYMENT)
+}
+
+enum STATUS {
+    REFUND
+    INCOMPLETE_PAYMENT
+    PROCESSING_PAYMENT
+    PROCESSING_SHIPPING
+    SHIPPING
+    PAYMENT_COMPLETE
+}
+
+model Quantity {
+    id          String        @id @default(uuid())
+    quantity    Int
+    transaction Transaction[]
+    courseId    String?
+}
+
+model Review {
+    id        String   @id @default(uuid())
+    rating    Int
+    review    String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    studentId String?
+    courseId  String?
+}
