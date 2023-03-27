@@ -29,13 +29,13 @@ const students = async( req : NextApiRequest, res : NextApiResponse )=>{
         case 'PUT':
             const data = req.body;
             try{
-                const post = await prisma.student.update({
+                const student = await prisma.student.update({
                     where:{
                         id: String(id)
                     },
                     data
                 });
-                res.status(200).json(post);
+                res.status(200).json(student);
             }catch(err){
                 return res.status(401).json({error: err})
             };
