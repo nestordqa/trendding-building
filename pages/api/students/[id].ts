@@ -15,7 +15,7 @@ const students = async( req : NextApiRequest, res : NextApiResponse )=>{
                         }
                     });
                     if(student){
-                        return res.status(201).json(student);
+                        return res.status(200).json(student);
                     };
                     if(!student){
                         return res.status(404).json({message: 'User does not exist!'})
