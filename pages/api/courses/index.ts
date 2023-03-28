@@ -7,9 +7,8 @@ const courses = async( req : NextApiRequest, res : NextApiResponse )=>{
         tittle,
         description,
         photo,
-        teachers,
-        students,
-        subject
+        subject,
+        courseRole
     } = req.body;
 
     switch (method) {
@@ -43,7 +42,7 @@ const courses = async( req : NextApiRequest, res : NextApiResponse )=>{
         case 'POST':
             try{
 
-                if(!tittle || !description || !photo || !subject){
+                if(!tittle || !description || !photo || !subject || !courseRole){
                     return res.status(401).json({error: 'Missing data!'})
                 }else{
                     const newCourse = await prisma.course.create({
@@ -52,6 +51,7 @@ const courses = async( req : NextApiRequest, res : NextApiResponse )=>{
                             description,
                             photo,
                             subject,
+                            courseRole,
                             active: true,
                             createdAt: new Date()
                         }

@@ -1,103 +1,106 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 enum StudentRole {
-    SILVER
-    GOLD
-    PLATINUM
-}
-
-enum Subject {
-    MATH
-    HISTORY
-    SOCCER
-    null
+  SILVER
+  GOLD
+  PLATINUM
 }
 
 enum AdminRole {
-    ADMIN
-    DEVELOPER
-    POSTER
+  ADMIN
+  DEVELOPER
+  POSTER
 }
+
 model Student {
-    id             String         @id @default(uuid())
-    firstName      String
-    lastName       String
-    email          String         @unique
-    email_verified Boolean?
-    gender         String?
-    birthday       String?
-    address        String?
-    phone          String?
-    city           String?
-    province       String?
-    country        String?
-    photo          String
-    role           StudentRole    @default(SILVER)
-    courses        Course[]
-    active         Boolean        @default(true)
-    createdAt      DateTime       @default(now())
-    updatedAt      DateTime       @updatedAt
+  id             String      @id @default(uuid())
+  firstName      String
+  lastName       String
+  email          String      @unique
+  email_verified Boolean?
+  gender         String?
+  birthday       String?
+  address        String?
+  phone          String?
+  city           String?
+  province       String?
+  country        String?
+  photo          String
+  role           StudentRole @default(SILVER)
+  courses        Course[]
+  active         Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 }
+
 model Admin {
-    id             String         @id @default(uuid())
-    firstName      String
-    lastName       String
-    email          String         @unique
-    email_verified Boolean?
-    gender         String?
-    birthday       String?
-    address        String?
-    phone          String?
-    city           String?
-    province       String?
-    country        String?
-    photo          String
-    role           AdminRole      @default(ADMIN)
-    active         Boolean        @default(true)
-    createdAt      DateTime       @default(now())
-    updatedAt      DateTime       @updatedAt
+  id             String    @id @default(uuid())
+  firstName      String
+  lastName       String
+  email          String    @unique
+  email_verified Boolean?
+  gender         String?
+  birthday       String?
+  address        String?
+  phone          String?
+  city           String?
+  province       String?
+  country        String?
+  photo          String
+  role           AdminRole @default(ADMIN)
+  active         Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }
 
 model Teacher {
-    id             String         @id @default(uuid())
-    firstName      String?
-    lastName       String?
-    email          String?         @unique
-    email_verified Boolean?
-    gender         String?
-    birthday       String?
-    address        String?
-    phone          String?
-    city           String?
-    province       String?
-    country        String?
-    photo          String
-    subject        Subject        @default(null)
-    courses        Course[]
-    active         Boolean        @default(true)
-    createdAt      DateTime       @default(now())
-    updatedAt      DateTime       @updatedAt
+  id             String   @id @default(uuid())
+  firstName      String?
+  lastName       String?
+  email          String?  @unique
+  email_verified Boolean?
+  gender         String?
+  birthday       String?
+  address        String?
+  phone          String?
+  city           String?
+  province       String?
+  country        String?
+  photo          String
+  subject        Subject[]
+  courses        Course[]
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Course {
-    id             String         @id @default(uuid())
-    tittle         String?
-    description    String?
-    photo          String?
-    subject        Subject        @default(null)
-    teachers       Teacher[]
-    students       Student[]
-    courseRole     StudentRole    @default(SILVER)
-    active         Boolean        @default(true)
-    createdAt      DateTime       @default(now())
-    updatedAt      DateTime       @updatedAt
+  id          String      @id @default(uuid())
+  tittle      String?
+  description String?
+  photo       String?
+  subject     Subject[]
+  teachers    Teacher[]
+  students    Student[]
+  courseRole  StudentRole @default(SILVER)
+  active      Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Subject{
+  id             String      @id @default(uuid())
+  tittle         String?
+  teachers       Teacher[]
+  courses        Course[]
+  active         Boolean     @default(true)
 }
