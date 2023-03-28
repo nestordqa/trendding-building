@@ -1,7 +1,18 @@
 import Head from 'next/head';
-import {NextPage} from 'next/types'
+import {NextPage} from 'next/types';
+import { getAdmin } from '../utils/fetchingDB';
 
 const Home : NextPage = ()=>{
+
+  console.log(getAdmin());
+  getAdmin()
+  .then((data)=>{
+    console.log(data);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+
   return (
     <>
       <Head>
