@@ -96,6 +96,7 @@ model Course {
     subject        Subject        @default(null)
     teachers       Teacher[]
     students       Student[]
+    courseRole     StudentRole    @default(SILVER)
     active         Boolean        @default(true)
     createdAt      DateTime       @default(now())
     updatedAt      DateTime       @updatedAt
