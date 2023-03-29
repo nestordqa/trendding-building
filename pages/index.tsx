@@ -23,25 +23,21 @@
 
 import Head from 'next/head';
 import {NextPage} from 'next/types';
+import { useQuery, useMutation } from 'react-query';
 import { getAdmin, getAdminById, postAdmin, updateAdmin, deleteAdmin } from '../utils/admin';
 import { getCourse, getCourseById, postCourse, updateCourse, deleteCourse } from '../utils/courses';
+import { getStudent, getStudentById, postStudent, updateStudent, deleteStudent } from '../utils/students';
+import { getTeacher, getTeacherById, postTeacher, updateTeacher, deleteTeacher } from '../utils/teacher';
 
 const Home : NextPage = ()=>{
 
-    const testing = {
-      tittle: 'Matematicas',
-      description: 'El mejor curso del mundo mundial',
-      photo: 'ola.jpg',
-      courseRole: 'GOLD'
-  }
+  const { 
+    data, 
+    isError, 
+    isLoading 
+  } = useQuery('admins', getAdmin);
 
-  deleteCourse('4f852429-318c-4664-a335-0334b7c0d13d')
-    .then((data)=>{
-      console.log(data);
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+
 
   return (
     <>
