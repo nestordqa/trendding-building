@@ -39,7 +39,7 @@ export default async function admins( req : NextApiRequest, res : NextApiRespons
                     }
                 });
                 if(admins.length <= 0){
-                    res.status(404).json({message: 'There are not admins yet!'});
+                    res.status(400).json({message: 'There are not admins yet!'});
                 };
                 if(admins.length > 0){
                     res.status(200).json(admins);

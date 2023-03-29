@@ -1,17 +1,47 @@
+  // const testing = {
+  //   firstName: 'Nestor',
+  //   lastName: 'Quinones',
+  //   email: 'jjjjj.com',
+  //   email_verified: true,
+  //   gender: 'MALE',
+  //   birthday: 'keli',
+  //   address: 'Elkoño',
+  //   phone: 'telefonito',
+  //   city: 'Elñoko',
+  //   province: 'Elñokito',
+  //   country: 'Elñokazo',
+  //   photo: 'webazo.jpg',
+  //   role: 'DEVELOPER'
+  // }
+
+//   const testing = {
+//     tittle: 'Matematicas',
+//     description: 'El mejor curso del mundo mundial',
+//     photo: 'ola.jpg',
+//     courseRole: 'GOLD'
+// }
+
 import Head from 'next/head';
 import {NextPage} from 'next/types';
-import { getAdmin } from '../utils/fetchingDB';
+import { getAdmin, getAdminById, postAdmin, updateAdmin, deleteAdmin } from '../utils/admin';
+import { getCourse, getCourseById, postCourse, updateCourse, deleteCourse } from '../utils/courses';
 
 const Home : NextPage = ()=>{
 
-  console.log(getAdmin());
-  getAdmin()
-  .then((data)=>{
-    console.log(data);
-  })
-  .catch((err)=>{
-    console.log(err);
-  })
+    const testing = {
+      tittle: 'Matematicas',
+      description: 'El mejor curso del mundo mundial',
+      photo: 'ola.jpg',
+      courseRole: 'GOLD'
+  }
+
+  deleteCourse('4f852429-318c-4664-a335-0334b7c0d13d')
+    .then((data)=>{
+      console.log(data);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
 
   return (
     <>

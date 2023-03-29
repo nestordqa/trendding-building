@@ -42,7 +42,7 @@ const courses = async( req : NextApiRequest, res : NextApiResponse )=>{
         case 'POST':
             try{
 
-                if(!tittle || !description || !photo || !subject || !courseRole){
+                if(!tittle || !description || !photo || !courseRole){
                     return res.status(401).json({error: 'Missing data!'})
                 }else{
                     const newCourse = await prisma.course.create({
