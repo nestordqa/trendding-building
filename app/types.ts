@@ -40,3 +40,21 @@ export interface postStudents {
     courses: postCourses[],
     updatedAt: Date
 }
+
+export interface postTeachers {
+    firstName: string,
+    lastName: string,
+    email: string,
+    email_verified: boolean,
+    gender: string,
+    birthday: string,
+    address: string,
+    phone: string,
+    city: string,
+    province: string,
+    country: string,
+    photo: string,
+    subject: string,
+    courses: postCourses[]
+    updatedAt: Date
+}
