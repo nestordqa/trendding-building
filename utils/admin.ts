@@ -24,6 +24,7 @@ export const getAdminById = async(id : String) =>{
 };
 
 export const postAdmin = async(data : postAdmins) =>{
+
     const response = await axios.post(`http://localhost:3000/api/admin/`, data);
     const admins = await response.data;
     
@@ -34,7 +35,11 @@ export const postAdmin = async(data : postAdmins) =>{
 };
 
 export const updateAdmin = async(data : any, id : String) =>{
-    const response = await axios.put(`http://localhost:3000/api/admin/${id}`, data);
+    let datos = {
+        ...data,
+        updatedAt: new Date()
+    }
+    const response = await axios.put(`http://localhost:3000/api/admin/${id}`, datos);
     const admins = await response.data;
     
     if(!admins){

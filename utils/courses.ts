@@ -34,7 +34,11 @@ export const postCourse = async(data : postCourses) =>{
 };
 
 export const updateCourse = async(data : any, id : String) =>{
-    const response = await axios.put(`http://localhost:3000/api/courses/${id}`, data);
+    let datos = {
+        ...data,
+        updatedAt: new Date()
+    }
+    const response = await axios.put(`http://localhost:3000/api/courses/${id}`, datos);
     const courses = await response.data;
     
     if(!courses){
