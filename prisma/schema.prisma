@@ -21,6 +21,14 @@ enum AdminRole {
   POSTER
 }
 
+enum Subject {
+  MATH
+  HISTORY
+  CHEMICAL
+  SPORTS
+  null
+}
+
 model Student {
   id             String      @id @default(uuid())
   firstName      String
@@ -81,26 +89,18 @@ model Teacher {
   active         Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-}
+}//RECORDAR PASAR ID DE LA MATERIA PARA SETEARLA
 
 model Course {
   id          String      @id @default(uuid())
   tittle      String?
   description String?
   photo       String?
-  subject     Subject[]
+  subject     Subject     @default(null)
   teachers    Teacher[]
   students    Student[]
   courseRole  StudentRole @default(SILVER)
   active      Boolean     @default(true)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-}
-
-model Subject{
-  id             String      @id @default(uuid())
-  tittle         String?
-  teachers       Teacher[]
-  courses        Course[]
-  active         Boolean     @default(true)
 }
