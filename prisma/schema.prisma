@@ -84,7 +84,7 @@ model Teacher {
   province       String?
   country        String?
   photo          String
-  subject        Subject[]
+  subject        Subject
   courses        Course[]
   active         Boolean  @default(true)
   createdAt      DateTime @default(now())
