@@ -28,24 +28,8 @@ const students = async( req : NextApiRequest, res : NextApiResponse )=>{
         case 'GET':
             try{
                 const students = await prisma.student.findMany({
-                    select: {
-                        id: true,
-                        firstName: true,
-                        lastName: true,
-                        email: true,
-                        gender: true,
-                        phone: true,
-                        city: true,
-                        province: true,
-                        country: true,
-                        role: true,
-                        courses:{
-                            select:{
-                                tittle: true
-                            }
-                        },
-                        active: true,
-                        createdAt: true
+                    where:{
+                        active: true
                     }
                 });
                 if(students.length <= 0){

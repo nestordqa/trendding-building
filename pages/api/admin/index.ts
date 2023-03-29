@@ -23,19 +23,8 @@ export default async function admins( req : NextApiRequest, res : NextApiRespons
         case 'GET':
             try{
                 const admins = await prisma.admin.findMany({
-                    select: {
-                        id: true,
-                        firstName: true,
-                        lastName: true,
-                        email: true,
-                        gender: true,
-                        phone: true,
-                        city: true,
-                        province: true,
-                        country: true,
-                        role: true,
-                        active: true,
-                        createdAt: true
+                    where:{
+                        active: true
                     }
                 });
                 if(admins.length <= 0){

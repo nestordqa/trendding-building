@@ -15,17 +15,8 @@ const courses = async( req : NextApiRequest, res : NextApiResponse )=>{
         case 'GET':
             try{
                 const courses = await prisma.course.findMany({
-                    select: {
-                        id: true,
-                        tittle: true,
-                        description: true,
-                        photo: true,
-                        subject: true,
-                        teachers: true,
-                        students: true,
-                        active: true,
-                        createdAt: true,
-                        updatedAt: true
+                    where:{
+                        active: true
                     }
                 });
                 if(courses.length <= 0){

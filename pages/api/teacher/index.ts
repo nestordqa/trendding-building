@@ -23,20 +23,8 @@ const teachers = async( req : NextApiRequest, res : NextApiResponse )=>{
         case 'GET':
             try{
                 const teachers = await prisma.teacher.findMany({
-                    select: {
-                        id: true,
-                        firstName: true,
-                        lastName: true,
-                        email: true,
-                        gender: true,
-                        phone: true,
-                        city: true,
-                        province: true,
-                        country: true,
-                        subject: true,
-                        courses: true,
-                        active: true,
-                        createdAt: true
+                    where:{
+                        active: true
                     }
                 });
                 if(teachers.length <= 0){
