@@ -1,10 +1,10 @@
-export const getServe = async() =>{
-    const res = await fetch('http://localhost:3000/api/admin')
-    const data = await res.json()
-  
-    return {
-      props:{
-        data,
-      },
-    }    
+import axios from "axios";
+
+export const getAdmin = async() =>{
+    const response = await fetch('/api/admin');
+    const admins = await response;
+
+    if(!admins) return 'There is no data!';
+
+    return admins;
 };

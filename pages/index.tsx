@@ -1,14 +1,18 @@
 import Head from 'next/head';
-import {InferGetServerSidePropsType} from 'next';
 import {NextPage} from 'next/types';
-import { 
-  getServe
- } from '../utils/fetchingDB';
+import { getAdmin } from '../utils/fetchingDB';
 
-const Home = ({data}:InferGetServerSidePropsType<typeof getServe>)=>{
+const Home : NextPage = ()=>{
 
-  console.log(data)
-  
+  console.log(getAdmin());
+  getAdmin()
+  .then((data)=>{
+    console.log(data);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+
   return (
     <>
       <Head>
