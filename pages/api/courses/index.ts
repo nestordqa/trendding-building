@@ -53,7 +53,8 @@ const courses = async( req : NextApiRequest, res : NextApiResponse )=>{
                             subject,
                             courseRole,
                             active: true,
-                            createdAt: new Date()
+                            createdAt: new Date(),
+                            updatedAt: new Date()
                         }
                     });
                     return res.status(201).json(newCourse);

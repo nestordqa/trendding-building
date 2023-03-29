@@ -89,7 +89,8 @@ const students = async( req : NextApiRequest, res : NextApiResponse )=>{
                             photo,
                             role,
                             active: true,
-                            createdAt: new Date()
+                            createdAt: new Date(),
+                            updatedAt: new Date()
                         }
                     });
                     return res.status(201).json(newStudent);

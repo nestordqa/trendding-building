@@ -80,7 +80,8 @@ const teachers = async( req : NextApiRequest, res : NextApiResponse )=>{
                             photo,
                             subject,
                             active: true,
-                            createdAt: new Date()
+                            createdAt: new Date(),
+                            updatedAt: new Date()
                         }
                     });
                     return res.status(201).json(newTeacher);

@@ -79,7 +79,8 @@ export default async function admins( req : NextApiRequest, res : NextApiRespons
                             photo,
                             role,
                             active: true,
-                            createdAt: new Date()
+                            createdAt: new Date(),
+                            updatedAt: new Date()
                         }
                     });
                     return res.status(201).json(newAdmin);
