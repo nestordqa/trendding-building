@@ -33,7 +33,7 @@ module.exports = {
           50: "#FF0000",
         },
         grey: {
-          50: "##808080"
+          50: "#808080",
         }
       },
       backgroundImage: {},
