@@ -30,6 +30,7 @@ import { getAdmin, getAdminById, postAdmin, updateAdmin, deleteAdmin } from '../
 import { getCourse, getCourseById, postCourse, updateCourse, deleteCourse } from '../utils/courses';
 import { getStudent, getStudentById, postStudent, updateStudent, deleteStudent } from '../utils/students';
 import { getTeacher, getTeacherById, postTeacher, updateTeacher, deleteTeacher } from '../utils/teacher';
+import { getCountries, getStates, getCities } from '../utils/countries';
 
 const Home : NextPage = ()=>{
 
@@ -62,7 +63,30 @@ const Home : NextPage = ()=>{
   // });
 
 
+// console.log(getCountries());
+// getCountries()
+//   .then((data)=>{
+//     console.log(data);
+//   })
+//   .catch((err)=>{
+//     console.log(err)
+//   });
 
+// getStates("Afghanistan")
+//   .then((data)=>{
+//     console.log(data)
+//   })
+//   .catch((err)=>{
+//     console.log(err)
+//   })
+
+  getCities("Kabul")
+  .then((data)=>{
+    console.log(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
 
   return (
     <>
