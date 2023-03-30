@@ -12,7 +12,7 @@ export interface postAdmins {
     country: string,
     photo: string,
     role: string,
-    updatedAt: Date    
+    updatedAt: Date | null    
 }
 
 export interface postCourses {

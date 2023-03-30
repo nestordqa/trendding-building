@@ -24,7 +24,8 @@
 import Head from 'next/head';
 import {NextPage} from 'next/types';
 import { useQuery, useMutation } from 'react-query';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import { CreateAdmin } from '@components/components/forms/CreateAdmin';
 import { getAdmin, getAdminById, postAdmin, updateAdmin, deleteAdmin } from '../utils/admin';
 import { getCourse, getCourseById, postCourse, updateCourse, deleteCourse } from '../utils/courses';
 import { getStudent, getStudentById, postStudent, updateStudent, deleteStudent } from '../utils/students';
@@ -32,33 +33,33 @@ import { getTeacher, getTeacherById, postTeacher, updateTeacher, deleteTeacher }
 
 const Home : NextPage = ()=>{
 
-  const route = useRouter();
-  const { id } = route.query;
+  // const route = useRouter();
+  // const { id } = route.query;
 
-  //Get all
-  const { 
-    data, 
-    isError, 
-    isLoading 
-  } = useQuery('admins', getAdmin);
+  // //Get all
+  // const { 
+  //   data, 
+  //   isError, 
+  //   isLoading 
+  // } = useQuery('admins', getAdmin);
 
-  //Get by ID
-  const {
-    data: adminById,
-    isError: error,
-    isLoading: loading
-  } = useQuery('getAdminById', ()=>{getAdminById(String(id))});
+  // //Get by ID
+  // const {
+  //   data: adminById,
+  //   isError: error,
+  //   isLoading: loading
+  // } = useQuery('getAdminById', ()=>{getAdminById(String(id))});
 
   //Update record
 
-  const update = {
-    firstName: 'Larry'
-  }
-  const { mutate } = useMutation('updateAdmin', {
-    onSuccess: ()=>{
-      console.log('Correctamente actualizado!')
-    }
-  });
+  // const update = {
+  //   firstName: 'Larry'
+  // }
+  // const { mutate } = useMutation('updateAdmin', {
+  //   onSuccess: ()=>{
+  //     console.log('Correctamente actualizado!')
+  //   }
+  // });
 
 
 
@@ -72,13 +73,7 @@ const Home : NextPage = ()=>{
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>
-          Hola mundo!!!
-        </h1>
-
-        <button onClick={()=>mutate({id, update})}>
-          Testeo
-        </button>
+        <CreateAdmin/>
       </main>
     </>
   );
