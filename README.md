@@ -5,13 +5,7 @@ prisma db push (Pushea modelos a DB)
 prisma migrate reset --force (Elimina db)
 
 
-IMPLEMENTAR: RECAPTCHA
-
--Modelar============>
-                    Dashboard students
-                    Dashboard teachers
-                    Dashboard Admins
-
+IMPLEMENTAR: RECAPTCHA, CALENDLY PARA AGENDAR CITAS
 
 OJO: 
 AGREGAR STUDENTS:
@@ -22,6 +16,7 @@ AGREGAR STUDENTS:
   Puntos
   Payment[]
   SocialMedia[]
+  Reviews:[]
 
 
 CREAR MODELO TIPO DE CURSO: USERTYPE
@@ -38,6 +33,12 @@ CREAR MODELO PAYMENT:
   date
   method (binance, paypal, stripe)
   
+AGREGAR A COURSES:
+  Points: (Puntos de plataforma)
+  Reviews[]
+  Learn: string[] (Que aprenderás)
+  Requires: string[] (Requerimientos)
+  Target: String[]
 
 
 CREAR MODELO LECCIONES: (Relacionar muchos a uno con curso)
@@ -48,6 +49,18 @@ CREAR MODELO LECCIONES: (Relacionar muchos a uno con curso)
   Foto:
   Active:
   Test:[]
+  Complete: boolean
+  
+ CREA MODELO TEST:
+  Title:
+  Description:
+  Points:
+  Answer:[]
+  
+ CREA MODELO EXERCISES:
+  Answer:
+  AnswerType: Boolean
+  TestId
  
  
 CREAR MODELO SOCIAL MEDIA:
