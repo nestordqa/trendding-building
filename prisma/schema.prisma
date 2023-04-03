@@ -9,7 +9,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum StudentRole {
+enum MembershipRole {
+  WOOD
   SILVER
   GOLD
   PLATINUM
@@ -29,6 +30,34 @@ enum Subject {
   null
 }
 
+enum redSocial {
+  FACEBOOK
+  INSTAGRAM
+  TWITTER
+  SNAPCHAT
+  LINKEDIN
+}
+
+enum PaymentMethod {
+  BINANCE
+  PAYPAL
+  STRIPE
+}
+
+model SocialMedia {
+  id            String      @id @default(uuid())
+  socialMedia   redSocial
+  student       Student[]         
+}
+
+model Membership {
+  id             String           @id @default(uuid())
+  membership     MembershipRole   @default(WOOD)
+  description    String
+  details        String[]
+  price          Float
+  students       Student[]
+}
 model Student {
   id             String      @id @default(uuid())
   firstName      String
@@ -43,11 +72,19 @@ model Student {
   province       String?
   country        String?
   photo          String
-  role           StudentRole @default(SILVER)
   courses        Course[]
-  active         Boolean     @default(true)
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  progress       Progress[]
+  companie       String
+  superpower     String
+  earnPoint      Int
+  socialMedia    SocialMedia[]
+  reviews        Review[]
+  payments       Payment[]
+  role           Membership     @relation(fields: [roleId], references: [id])
+  roleId         String
+  active         Boolean        @default(true)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 }
 
 model Admin {
@@ -91,16 +128,88 @@ model Teacher {
   updatedAt      DateTime @updatedAt
 }//RECORDAR PASAR ID DE LA MATERIA PARA SETEARLA
 
+model Progress {
+  id              String      @id @default(uuid())
+  student         Student     @relation(fields: [studentId], references: [id])
+  studentId       String
+  course          Course      @relation(fields: [courseId], references: [id])
+  courseId        String
+  progressFactor  Int         @default(0)
+}
 model Course {
-  id          String      @id @default(uuid())
+  id          String        @id @default(uuid())
   tittle      String?
   description String?
+  learn       String[]
+  requires    String[]
+  targets     String[]
   photo       String?
-  subject     Subject     @default(null)
+  subject     Subject        @default(null)
   teachers    Teacher[]
   students    Student[]
-  courseRole  StudentRole @default(SILVER)
-  active      Boolean     @default(true)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  progress    Progress[]
+  courseRole  MembershipRole @default(WOOD)
+  points      Int
+  reviews     Review[]
+  lections    Lection[]
+  active      Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model Lection {
+  id        String      @id @default(uuid())
+  title     String
+  video     String
+  points    Int
+  photo     String
+  active    Boolean     @default(true)
+  test      Test[]
+  complete  Boolean     @default(false)
+  course    Course      @relation(fields: [courseId], references: [id])
+  courseId  String
+}
+
+model Test {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  points      Int
+  option      Exercises[]
+  lection     Lection      @relation(fields: [lectionId], references: [id])
+  lectionId   String   
+}
+
+model Exercises {
+  id          String      @id @default(uuid()) 
+  question    String?
+  answer      String
+  ok          Boolean?
+  test        Test        @relation(fields: [testId], references: [id])
+  testId      String
+}
+
+model Review {
+    id        String      @id @default(uuid())
+    rating    Int
+    review    String
+    createdAt DateTime    @default(now())
+    updatedAt DateTime    @updatedAt
+    student   Student?    @relation(fields: [studentId], references: [id])
+    studentId    String?
+    course   Course?      @relation(fields: [courseId], references: [id])
+    courseId String?
+    @@unique([studentId, courseId])
+}
+
+model Payment {
+  id          String          @id @default(uuid())
+  method      PaymentMethod   
+  amout       Float
+  interfaceId String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  student     Student         @relation(fields: [studentId], references: [id])
+  studentId   String
+  membership  MembershipRole  @default(WOOD)
 }
