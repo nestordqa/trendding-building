@@ -30,9 +30,25 @@ import { getAdmin, getAdminById, postAdmin, updateAdmin, deleteAdmin } from '../
 import { getCourse, getCourseById, postCourse, updateCourse, deleteCourse } from '../utils/courses';
 import { getStudent, getStudentById, postStudent, updateStudent, deleteStudent } from '../utils/students';
 import { getTeacher, getTeacherById, postTeacher, updateTeacher, deleteTeacher } from '../utils/teacher';
-import { getCountries, getStates, getCities } from '../utils/countries';
+import { 
+  getAuth, 
+  signInWithPopup, 
+  GoogleAuthProvider 
+} from 'firebase/auth';
+import { initFirebase } from '@components/firebase/firebaseApp';
+import { sign } from 'crypto';
+// import { getCountries, getStates, getCities } from '../utils/countries';
 
 const Home : NextPage = ()=>{
+
+  initFirebase();
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+
+  const signIn = async()=>{
+    const result = await signInWithPopup(auth, provider);
+    console.log(result)
+  }
 
   // const route = useRouter();
   // const { id } = route.query;
@@ -80,13 +96,13 @@ const Home : NextPage = ()=>{
 //     console.log(err)
 //   })
 
-  getCities("Kabul")
-  .then((data)=>{
-    console.log(data)
-  })
-  .catch((err)=>{
-    console.log(err)
-  })
+  // getCities("Kabul")
+  // .then((data)=>{
+  //   console.log(data)
+  // })
+  // .catch((err)=>{
+  //   console.log(err)
+  // })
 
   return (
     <>
@@ -97,7 +113,10 @@ const Home : NextPage = ()=>{
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <CreateAdmin/>
+        {/* <CreateAdmin/> */}
+        <button onClick={()=>signIn()}>
+          Sign In
+        </button>
       </main>
     </>
   );
