@@ -4,7 +4,6 @@ import { prisma } from '../../../lib/prisma';
 const students = async( req : NextApiRequest, res : NextApiResponse )=>{
     const method = req.method;
     const {
-        id, 
         firstName, 
         lastName, 
         email, 
@@ -16,12 +15,9 @@ const students = async( req : NextApiRequest, res : NextApiResponse )=>{
         city, 
         province, 
         country, 
-        photo, 
-        role, 
-        courses, 
-        active, 
-        createdAt, 
-        updatedAt
+        photo,
+        companie,
+        superpower
     } = req.body;
 
     switch (method) {
@@ -71,7 +67,8 @@ const students = async( req : NextApiRequest, res : NextApiResponse )=>{
                             province,
                             country,
                             photo,
-                            role,
+                            companie,
+                            superpower,
                             active: true,
                             createdAt: new Date(),
                             updatedAt: new Date()
