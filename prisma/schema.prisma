@@ -9,7 +9,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum MembershipRole {
+enum Membership {
   WOOD
   SILVER
   GOLD
@@ -45,18 +45,11 @@ enum PaymentMethod {
 }
 
 model SocialMedia {
-  id            String      @id @default(uuid())
-  socialMedia   redSocial
-  student       Student[]         
-}
-
-model Membership {
-  id             String           @id @default(uuid())
-  membership     MembershipRole   @default(WOOD)
-  description    String
-  details        String[]
-  price          Float
-  students       Student[]
+  id                String        @id @default(uuid())
+  socialMedia       redSocial
+  userName          String
+  student           Student     @relation(fields: [studentId], references: [id])
+  studentId         String         
 }
 model Student {
   id             String      @id @default(uuid())
@@ -67,21 +60,20 @@ model Student {
   gender         String?
   birthday       String?
   address        String?
-  phone          String?
-  city           String?
-  province       String?
-  country        String?
-  photo          String
+  phone          String
+  city           String
+  province       String
+  country        String
+  photo          String?
   courses        Course[]
   progress       Progress[]
-  companie       String
-  superpower     String
-  earnPoint      Int
+  companie       String?
+  superpower     String?
+  earnPoint      Int?
   socialMedia    SocialMedia[]
   reviews        Review[]
   payments       Payment[]
-  role           Membership     @relation(fields: [roleId], references: [id])
-  roleId         String
+  role           Membership     @default(WOOD)
   active         Boolean        @default(true)
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
@@ -148,7 +140,7 @@ model Course {
   teachers    Teacher[]
   students    Student[]
   progress    Progress[]
-  courseRole  MembershipRole @default(WOOD)
+  courseRole  Membership
   points      Int
   reviews     Review[]
   lections    Lection[]
@@ -196,9 +188,9 @@ model Review {
     createdAt DateTime    @default(now())
     updatedAt DateTime    @updatedAt
     student   Student?    @relation(fields: [studentId], references: [id])
-    studentId    String?
-    course   Course?      @relation(fields: [courseId], references: [id])
-    courseId String?
+    studentId String?
+    course    Course?      @relation(fields: [courseId], references: [id])
+    courseId  String?
     @@unique([studentId, courseId])
 }
 
@@ -211,5 +203,5 @@ model Payment {
   updatedAt   DateTime        @updatedAt
   student     Student         @relation(fields: [studentId], references: [id])
   studentId   String
-  membership  MembershipRole  @default(WOOD)
+  membership  Membership      @default(WOOD)
 }
