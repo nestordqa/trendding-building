@@ -56,3 +56,16 @@ export const deleteStudent = async(id : String) =>{
     };
     return students;
 };
+
+export const getStudentByEmail = async(email : string | null | undefined) =>{
+    const response = await fetch('http://localhost:3000/api/students');
+    const students = await response.json();
+    
+    if(!students){
+        return 'There is no data';
+    };
+    if(students){
+        let filtering = await students.filter((student : any, idx : string)=> student.email === email);
+        return await filtering;
+    }
+};

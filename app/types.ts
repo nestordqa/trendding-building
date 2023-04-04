@@ -24,6 +24,7 @@ export interface postCourses {
 }
 
 export interface postStudents {
+    id: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -37,7 +38,6 @@ export interface postStudents {
     country: string,
     photo: string,
     studentRole: string,
-    courses: postCourses[],
     updatedAt: Date
 }
 

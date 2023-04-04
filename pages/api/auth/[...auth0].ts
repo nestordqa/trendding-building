@@ -1,4 +1,4 @@
-// import { NextApiRequest, NextApiResponse } from 'next';
+// import { NextApiRequest, NextApiResponse } from 'next'
 // import auth0 from '../../../utils/auth0';
 
 // const audience = process.env.AUTH0_AUDIENCE
@@ -53,7 +53,6 @@
 //         })
 //     }
 // })
-
 import { handleAuth } from '@auth0/nextjs-auth0';
 
 export default handleAuth();

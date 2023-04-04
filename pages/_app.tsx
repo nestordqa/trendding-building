@@ -4,13 +4,19 @@ import {
   QueryClient,
   QueryClientProvider
 } from 'react-query';
+import { UserProvider } from '@auth0/nextjs-auth0/client'
 
 const client = new QueryClient()
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ 
+  Component, 
+  pageProps
+}: AppProps) {
   return( 
-    <QueryClientProvider client={client}>
-      <Component {...pageProps} />
-    </QueryClientProvider>
+    <UserProvider>
+      <QueryClientProvider client={client}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </UserProvider>
   )
 }

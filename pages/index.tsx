@@ -22,87 +22,69 @@
 // }
 
 import Head from 'next/head';
-import {NextPage} from 'next/types';
-import { useQuery, useMutation } from 'react-query';
-import { useRouter } from 'next/router';
-import { CreateAdmin } from '@components/components/forms/CreateAdmin';
-import { getAdmin, getAdminById, postAdmin, updateAdmin, deleteAdmin } from '../utils/admin';
-import { getCourse, getCourseById, postCourse, updateCourse, deleteCourse } from '../utils/courses';
-import { getStudent, getStudentById, postStudent, updateStudent, deleteStudent } from '../utils/students';
-import { getTeacher, getTeacherById, postTeacher, updateTeacher, deleteTeacher } from '../utils/teacher';
+import {NextPage} from 'next';
+import { useState, useEffect } from 'react';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import AuthButton from '@components/components/auth/AuthButton';
 import { 
-  getAuth, 
-  signInWithPopup, 
-  GoogleAuthProvider 
-} from 'firebase/auth';
-import { initFirebase } from '@components/firebase/firebaseApp';
-import { sign } from 'crypto';
-// import { getCountries, getStates, getCities } from '../utils/countries';
+  getStudentByEmail, 
+  postStudent
+} from '../utils/students'
 
 const Home : NextPage = ()=>{
 
-  initFirebase();
-  const provider = new GoogleAuthProvider();
-  const auth = getAuth();
-
-  const signIn = async()=>{
-    const result = await signInWithPopup(auth, provider);
-    console.log(result)
+  const { user, error, isLoading } = useUser();
+  const [exist, setExist] = useState(false);
+  if(user){
+    useEffect(()=>{
+      getStudentByEmail(user.email)
+          .then((data)=>
+             data.json()
+          )
+          .then((response)=>{
+              if(response){
+                  setExist(true);
+              };
+              if(!response){
+                  setExist(false);
+              }
+          })
+          .catch((error)=>{
+              console.log(error);
+          });
+  
+  if(!exist){
+      const data = {
+          id: String(user.sub?.slice(user.sub.indexOf('|')+1, user.sub.length-1)),
+          firstName: String(user.given_name),
+          lastName: String(user.family_name),
+          email: String(user.email),
+          email_verified: Boolean(user.email_verified),
+          gender: '',
+          birthday: '',
+          address: '',
+          phone: '',
+          city: '',
+          province: '',
+          country: '',
+          photo: String(user.picture),
+          studentRole: 'SILVER',
+          updatedAt: new Date()
+      }
+      postStudent(data)
+          .then((data)=>{
+              console.log(data),
+              alert('User created')
+          })
+          .catch((error)=>{
+              console.log(`Error ====>>>> ${error}`)
+          })    
+  }
+  }, [])
   }
 
-  // const route = useRouter();
-  // const { id } = route.query;
 
-  // //Get all
-  // const { 
-  //   data, 
-  //   isError, 
-  //   isLoading 
-  // } = useQuery('admins', getAdmin);
-
-  // //Get by ID
-  // const {
-  //   data: adminById,
-  //   isError: error,
-  //   isLoading: loading
-  // } = useQuery('getAdminById', ()=>{getAdminById(String(id))});
-
-  //Update record
-
-  // const update = {
-  //   firstName: 'Larry'
-  // }
-  // const { mutate } = useMutation('updateAdmin', {
-  //   onSuccess: ()=>{
-  //     console.log('Correctamente actualizado!')
-  //   }
-  // });
-
-
-// console.log(getCountries());
-// getCountries()
-//   .then((data)=>{
-//     console.log(data);
-//   })
-//   .catch((err)=>{
-//     console.log(err)
-//   });
-
-// getStates("Afghanistan")
-//   .then((data)=>{
-//     console.log(data)
-//   })
-//   .catch((err)=>{
-//     console.log(err)
-//   })
-
-  // getCities("Kabul")
-  // .then((data)=>{
-  //   console.log(data)
-  // })
-  // .catch((err)=>{
-  //   console.log(err)
-  // })
+  console.log(user);
 
   return (
     <>
@@ -112,11 +94,8 @@ const Home : NextPage = ()=>{
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        {/* <CreateAdmin/> */}
-        <button onClick={()=>signIn()}>
-          Sign In
-        </button>
+      <main className='flex flex-col justify-center items-center w-screen h-screen'>
+        <AuthButton/>
       </main>
     </>
   );
