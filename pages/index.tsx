@@ -24,32 +24,18 @@
 import Head from 'next/head';
 import {NextPage} from 'next';
 import { useState, useEffect } from 'react';
-import { useUser } from '@auth0/nextjs-auth0/client';
 import AuthButton from '@components/components/auth/AuthButton';
 import { 
   getStudentByEmail, 
   postStudent
-} from '../utils/students'
+} from '../utils/students';
+import { useUsers } from '../components/ContextProvider/ContextProvider';
 
 const Home : NextPage = ()=>{
 
-    // let data = {
-    //   id: String(id),
-    //   firstName: String(user?.given_name),
-    //   lastName: String(user?.family_name),
-    //   email: String(user?.email),
-    //   email_verified: Boolean(user?.email_verified),
-    //   gender: '',
-    //   birthday: '',
-    //   address: '',
-    //   phone: '1234567890',
-    //   city: 'city',
-    //   province: 'province',
-    //   country: 'country',
-    //   photo: String(user?.picture),
-    //   studentRole: 'SILVER',
-    //   updatedAt: new Date()
-    // }
+  const id = useUsers();
+  console.log(id)
+
   return (
     <>
       <Head>

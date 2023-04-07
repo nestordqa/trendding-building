@@ -12,7 +12,7 @@ import {
 import { useMutation } from 'react-query';
 import axios from 'axios';
 
-const userContext = createContext({});
+const userContext = createContext('No user yet');
 
 type Props = {
     children: string | JSX.Element | JSX.Element[]
@@ -47,28 +47,18 @@ const postUser = async(data : postUser) =>{
 
 const ContextProvider = ({ children } : Props) =>{ 
     
-    const {
-        user,
-        error,
-        isLoading
-    } = useUser();
+    const { user } = useUser();
 
     let id = user?.sub?.slice(user?.sub.indexOf('|')+1, user.sub.length);
 
-    const [usuario, setUsuario] = useState({
-        user,
-        error,
-        isLoading
-    });
+    const [usuario, setUsuario] = useState('');
 
     const mutation = useMutation((data: any) => postUser(data),
         {
             onSuccess: ()=>{
-                setUsuario({
-                    user,
-                    error,
-                    isLoading
-                })            
+                let id = String(user?.sub?.slice(user?.sub.indexOf('|')+1, user.sub.length));
+                setUsuario(id)
+                console.log('User created successfully!')
             },
             onError: (error)=>{
                 console.log(error)
