@@ -1,4 +1,4 @@
-export interface postAdmins {
+export interface postUser {
     firstName: string,
     lastName: string,
     email: string,
@@ -11,8 +11,29 @@ export interface postAdmins {
     province: string,
     country: string,
     photo: string,
-    role: string,
+    userRole: string,
     updatedAt: Date | null    
+}
+
+export interface getUser {
+    firstName: string,
+    lastName: string,
+    email: string,
+    email_verified: boolean,
+    gender: string,
+    birthday: string,
+    address: string,
+    phone: string,
+    city: string,
+    province: string,
+    country: string,
+    photo: string,
+    userRole: string,
+    student: postStudents,
+    teacher: postTeachers,
+    active: boolean,
+    updatedAt: Date | null 
+    createdAt: Date | null    
 }
 
 export interface postCourses {
@@ -25,20 +46,17 @@ export interface postCourses {
 
 export interface postStudents {
     id: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    email_verified: boolean,
-    gender: string,
-    birthday: string,
-    address: string,
-    phone: string,
-    city: string,
-    province: string,
-    country: string,
-    photo: string,
-    studentRole: string,
+    companie: string,
+    superpower: string
+    socialMedia: socialMedia[],
+    userId: string,
     updatedAt: Date
+}
+
+export interface socialMedia {
+    socialMedia: string,
+    userName: string,
+    studentId: string
 }
 
 export interface postTeachers {

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import {
-    postAdmins
+    postUser,
+    getUser
 } from '../app/types';
 
 export const getAdmin = async() =>{
-    const response = await fetch('http://localhost:3000/api/admin');
-    const admins = await response.json();
+    const response = await fetch('http://localhost:3000/api/users');
+    const data = await response.json();
+    const admins = await data.filter((admin : getUser, _idx : number)=>admin.userRole === 'ADMIN')
     
     if(!admins){
         return 'There is no data';
@@ -14,7 +16,7 @@ export const getAdmin = async() =>{
 };
 
 export const getAdminById = async(id : String) =>{
-    const response = await fetch(`http://localhost:3000/api/admin/${id}`);
+    const response = await fetch(`http://localhost:3000/api/users/${id}`);
     const admins = await response.json();
     
     if(!admins){
@@ -23,9 +25,9 @@ export const getAdminById = async(id : String) =>{
     return admins;
 };
 
-export const postAdmin = async(data : postAdmins) =>{
+export const postAdmin = async(data : postUser) =>{
 
-    const response = await axios.post(`http://localhost:3000/api/admin/`, data);
+    const response = await axios.post(`http://localhost:3000/api/users/`, data);
     const admins = await response.data;
     
     if(!admins){
@@ -39,7 +41,7 @@ export const updateAdmin = async(data : any, id : String) =>{
         ...data,
         updatedAt: new Date()
     }
-    const response = await axios.put(`http://localhost:3000/api/admin/${id}`, datos);
+    const response = await axios.put(`http://localhost:3000/api/users/${id}`, datos);
     const admins = await response.data;
     
     if(!admins){
@@ -49,7 +51,7 @@ export const updateAdmin = async(data : any, id : String) =>{
 };
 
 export const deleteAdmin = async(id : String) =>{
-    const response = await axios.delete(`http://localhost:3000/api/admin/${id}`);
+    const response = await axios.delete(`http://localhost:3000/api/users/${id}`);
     const admins = await response.data;
     
     if(!admins){
