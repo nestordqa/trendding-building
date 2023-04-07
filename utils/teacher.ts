@@ -1,11 +1,13 @@
 import axios from 'axios';
 import {
-    postTeachers
+    postTeachers,
+    getUser
 } from '../app/types';
 
 export const getTeacher = async() =>{
-    const response = await fetch('http://localhost:3000/api/teacher');
-    const teachers = await response.json();
+    const response = await fetch('http://localhost:3000/api/users');
+    const data = await response.json();
+    const teachers = await data.filter((teacher : getUser, _idx : number)=>teacher.userRole === 'TEACHER')
     
     if(!teachers){
         return 'There is no data';
@@ -14,7 +16,7 @@ export const getTeacher = async() =>{
 };
 
 export const getTeacherById = async(id : String) =>{
-    const response = await fetch(`http://localhost:3000/api/teacher/${id}`);
+    const response = await fetch(`http://localhost:3000/api/users/${id}`);
     const teachers = await response.json();
     
     if(!teachers){
@@ -24,7 +26,7 @@ export const getTeacherById = async(id : String) =>{
 };
 
 export const postTeacher = async(data : postTeachers) =>{
-    const response = await axios.post(`http://localhost:3000/api/teacher/`, data);
+    const response = await axios.post(`http://localhost:3000/api/users/`, data);
     const teachers = await response.data;
     
     if(!teachers){
@@ -38,7 +40,7 @@ export const updateTeacher = async(data : any, id : String) =>{
         ...data,
         updatedAt: new Date()
     }
-    const response = await axios.put(`http://localhost:3000/api/teacher/${id}`, datos);
+    const response = await axios.put(`http://localhost:3000/api/users/${id}`, datos);
     const teachers = await response.data;
     
     if(!teachers){
@@ -48,7 +50,7 @@ export const updateTeacher = async(data : any, id : String) =>{
 };
 
 export const deleteTeacher = async(id : String) =>{
-    const response = await axios.delete(`http://localhost:3000/api/teacher/${id}`);
+    const response = await axios.delete(`http://localhost:3000/api/users/${id}`);
     const teachers = await response.data;
     
     if(!teachers){

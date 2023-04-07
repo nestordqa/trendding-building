@@ -60,19 +60,7 @@ export interface socialMedia {
 }
 
 export interface postTeachers {
-    firstName: string,
-    lastName: string,
-    email: string,
-    email_verified: boolean,
-    gender: string,
-    birthday: string,
-    address: string,
-    phone: string,
-    city: string,
-    province: string,
-    country: string,
-    photo: string,
+    id: string,
     subject: string,
-    courses: postCourses[]
-    updatedAt: Date
+    userId: string
 }
