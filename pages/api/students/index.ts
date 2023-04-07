@@ -50,9 +50,9 @@ const students = async( req : NextApiRequest, res : NextApiResponse )=>{
                 if(finding){
                      return res.status(401).json({message: 'User already exist.'})
                 }
-                if(!firstName || !lastName || !email || !email_verified || !gender || !birthday || !address || !phone || !city || !province || !country || !photo){
-                    return res.status(401).json({error: 'Missing data!'})
-                }
+                // if(!firstName || !lastName || !email || !email_verified || !gender || !birthday || !address || !phone || !city || !province || !country || !photo){
+                //     return res.status(401).json({error: 'Missing data!'})
+                // }
                 if(!finding){
                     const newStudent = await prisma.student.create({
                         data:{

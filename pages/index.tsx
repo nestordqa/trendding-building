@@ -33,58 +33,55 @@ import {
 
 const Home : NextPage = ()=>{
 
-  const { user, error, isLoading } = useUser();
-  const [exist, setExist] = useState(false);
-  if(user){
-    useEffect(()=>{
-      getStudentByEmail(user.email)
-          .then((data)=>
-             data.json()
-          )
-          .then((response)=>{
-              if(response){
-                  setExist(true);
-              };
-              if(!response){
-                  setExist(false);
-              }
-          })
-          .catch((error)=>{
-              console.log(error);
-          });
-  
-  if(!exist){
-      const data = {
-          id: String(user.sub?.slice(user.sub.indexOf('|')+1, user.sub.length-1)),
-          firstName: String(user.given_name),
-          lastName: String(user.family_name),
-          email: String(user.email),
-          email_verified: Boolean(user.email_verified),
-          gender: '',
-          birthday: '',
-          address: '',
-          phone: '',
-          city: '',
-          province: '',
-          country: '',
-          photo: String(user.picture),
-          studentRole: 'SILVER',
-          updatedAt: new Date()
-      }
-      postStudent(data)
-          .then((data)=>{
-              console.log(data),
-              alert('User created')
-          })
-          .catch((error)=>{
-              console.log(`Error ====>>>> ${error}`)
-          })    
-  }
-  }, [])
-  }
 
+  const { 
+    user, 
+    error, 
+    isLoading 
+  } = useUser();
 
-  console.log(user);
+  useEffect(()=>{
+   if(!user) return;
+   if(user && user.given_name !== undefined){
+    let id = user?.sub?.slice(user?.sub.indexOf('|')+1, user.sub.length);
+    let data = {
+      id: String(id),
+      firstName: String(user?.given_name),
+      lastName: String(user?.family_name),
+      email: String(user?.email),
+      email_verified: Boolean(user?.email_verified),
+      gender: '',
+      birthday: '',
+      address: '',
+      phone: '1234567890',
+      city: 'city',
+      province: 'province',
+      country: 'country',
+      photo: String(user?.picture),
+      studentRole: 'SILVER',
+      updatedAt: new Date()
+    }
+    let find;
+    getStudentByEmail(user?.email)
+     .then((data)=>{
+       data ? find = true : find = false;
+       console.log('Usuario ya existe!')
+     })
+     .catch((error)=>{
+       error ? find = false : find = true
+     });
+   if(find) return;
+   if(!find){
+     postStudent(data)
+       .then((data)=>{
+         console.log(data)
+       })
+       .catch((error)=>{
+         console.log(error)
+       })
+   }  
+   };
+  },[user])
 
   return (
     <>
