@@ -1,11 +1,13 @@
 import axios from 'axios';
 import {
-    postStudents
+    postStudents,
+    getUser
 } from '../app/types';
 
 export const getStudent = async() =>{
-    const response = await fetch('http://localhost:3000/api/students');
-    const students = await response.json();
+    const response = await fetch('http://localhost:3000/api/users');
+    const data = await response.json();
+    const students = await data.filter((student : getUser, _idx : number)=> student.userRole === 'STUDENT')
     
     if(!students){
         return 'There is no data';
@@ -14,7 +16,7 @@ export const getStudent = async() =>{
 };
 
 export const getStudentById = async(id : String) =>{
-    const response = await fetch(`http://localhost:3000/api/students/${id}`);
+    const response = await fetch(`http://localhost:3000/api/users/${id}`);
     const students = await response.json();
     
     if(!students){
@@ -24,7 +26,7 @@ export const getStudentById = async(id : String) =>{
 };
 
 export const postStudent = async(data : postStudents) =>{
-    const response = await axios.post(`http://localhost:3000/api/students/`, data);
+    const response = await axios.post(`http://localhost:3000/api/users/`, data);
     const students = await response.data;
     
     if(!students){
@@ -38,7 +40,7 @@ export const updateStudent = async(data : any, id : String) =>{
         ...data,
         updatedAt: new Date()
     }
-    const response = await axios.put(`http://localhost:3000/api/students/${id}`, datos);
+    const response = await axios.put(`http://localhost:3000/api/users/${id}`, datos);
     const students = await response.data;
     
     if(!students){
@@ -48,7 +50,7 @@ export const updateStudent = async(data : any, id : String) =>{
 };
 
 export const deleteStudent = async(id : String) =>{
-    const response = await axios.delete(`http://localhost:3000/api/students/${id}`);
+    const response = await axios.delete(`http://localhost:3000/api/users/${id}`);
     const students = await response.data;
     
     if(!students){
@@ -58,14 +60,14 @@ export const deleteStudent = async(id : String) =>{
 };
 
 export const getStudentByEmail = async(email : string | null | undefined) =>{
-    const response = await fetch('http://localhost:3000/api/students');
+    const response = await fetch('http://localhost:3000/api/users');
     const students = await response.json();
     
     if(!students){
         return 'There is no data';
     };
     if(students){
-        let filtering = await students.filter((student : any, idx : string)=> student.email === email);
+        let filtering = await students.filter((student : getUser, _idx : number)=> student.email === email);
         return await filtering;
     }
 };
