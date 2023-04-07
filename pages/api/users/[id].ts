@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import { prisma } from '../../../lib/prisma';
 
-export default async function admins( req : NextApiRequest, res : NextApiResponse ){
+export default async function users( req : NextApiRequest, res : NextApiResponse ){
     const method = req.method;
     const id = req.query.id;
 
@@ -9,7 +9,7 @@ export default async function admins( req : NextApiRequest, res : NextApiRespons
         case 'GET':
             try{
                 if(id){
-                    const admin = await prisma.admin.findUnique({
+                    const admin = await prisma.user.findUnique({
                         where:{
                             id: String(id)
                         }
@@ -18,7 +18,7 @@ export default async function admins( req : NextApiRequest, res : NextApiRespons
                         return res.status(200).json(admin);
                     };
                     if(!admin){
-                        return res.status(404).json({message: 'Admin does not exist!'})
+                        return res.status(404).json({message: 'User does not exist!'})
                     };
                 };
             }catch(err){
@@ -29,7 +29,7 @@ export default async function admins( req : NextApiRequest, res : NextApiRespons
         case 'PUT':
             const data = req.body;
             try{
-                const admin = await prisma.admin.update({
+                const admin = await prisma.user.update({
                     where:{
                         id: String(id)
                     },
@@ -44,7 +44,7 @@ export default async function admins( req : NextApiRequest, res : NextApiRespons
 
         case 'DELETE':
             try {
-                const admin = await prisma.admin.update({
+                const admin = await prisma.user.update({
                     where:{ 
                         id: String(id) 
                     },
@@ -53,9 +53,9 @@ export default async function admins( req : NextApiRequest, res : NextApiRespons
                     },
                 });
                 admin
-                    ? res.status(200).json({ message: "Admin logic delete" })
+                    ? res.status(200).json({ message: "User logic delete" })
                     : res.status(400).json({
-                        message: "Admin does not exist in the database.",
+                        message: "User does not exist in the database.",
                     });
             } catch (error) {
                 res.status(400).json({ message: error });
