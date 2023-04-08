@@ -29,12 +29,17 @@ import {
   getStudentByEmail, 
   postStudent
 } from '../utils/students';
+
 import { useUsers } from '../components/ContextProvider/ContextProvider';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 const Home : NextPage = ()=>{
-
+//Custom hook, trae ID del usuario si existe
   const id = useUsers();
-  console.log(id)
+  const {user} = useUser();
+  console.log(id);
+
+  id ? console.log(id) : console.log('No existo :(')
 
   return (
     <>
