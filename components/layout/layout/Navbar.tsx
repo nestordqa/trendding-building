@@ -104,37 +104,24 @@ export const Navbar = () => {
                 <Link href="/help">{t.navbar.help}</Link>
                 </li>
                 <li>
-                <div className="mt-3 space-x-4 lg:hidden flex flex-row w-full justify-center items-center">
-                    <Link href={asPath} locale={'es'}>
-                        ES
-                    </Link>
-                    <Link href={asPath} locale={'en'}>
-                        EN
-                    </Link>
+                <div className="mt-3 space-x-4 flex flex-row w-full justify-center items-center">
+                    {
+                        locale === 'en' ?
+                            <Link href={asPath} locale={'es'}>
+                                ES
+                            </Link>
+                        :
+                            <Link href={asPath} locale={'en'}>
+                                EN
+                            </Link>
+                    }
                 </div>
               </li>
             </ul>
           </div>
         </div>
         <div className="hidden space-x-2 md:flex md:flex-row md:mt-2">
-          <Link href="https://www.instagram.com/enlazar.ok/" target="_blank">
-            <AiFillInstagram style={icon} />
-          </Link>
-          <Link href="https://t.me/joinchat/e8dtvJ5XB2k1MGIx" target="_blank">
-            <FaTelegramPlane style={icon} />
-          </Link>
-          <Link href="https://www.linkedin.com/company/enlazar" target="_blank">
-            <FaLinkedinIn style={icon} />
-          </Link>
-          <Link href="https://www.facebook.com/enlazar.ok/" target="_blank">
-            <FaFacebookF style={icon} />
-          </Link>
-          <Link href="https://twitter.com/Enlazar_ok" target="_blank">
-            <FaTwitter style={icon} />
-          </Link>
-          <Link href="https://www.tiktok.com/@enlazar.ok" target="_blank">
-            <FaTiktok style={icon} />
-          </Link>
+            USUARIO
         </div>
       </div>
     </nav>
