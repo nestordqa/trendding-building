@@ -23,23 +23,15 @@
 
 import Head from 'next/head';
 import {NextPage} from 'next';
-import { useState, useEffect } from 'react';
 import AuthButton from '@components/components/auth/AuthButton';
-import { 
-  getStudentByEmail, 
-  postStudent
-} from '../utils/students';
-
-import { useUsers } from '../components/ContextProvider/ContextProvider';
-import { useUser } from '@auth0/nextjs-auth0/client';
+// import { useUsers } from '../components/ContextProvider/ContextProvider';
+// import { useUser } from '@auth0/nextjs-auth0/client';
+// import ModalPayment from '@components/components/payments/ModalPayment';
 
 const Home : NextPage = ()=>{
 //Custom hook, trae ID del usuario si existe
-  const id = useUsers();
-  const {user} = useUser();
-  console.log(id);
-
-  id ? console.log(id) : console.log('No existo :(')
+  // const id = useUsers();
+  // const {user} = useUser();
 
   return (
     <>
@@ -51,6 +43,31 @@ const Home : NextPage = ()=>{
       </Head>
       <main className='flex flex-col justify-center items-center w-screen h-screen'>
         <AuthButton/>
+        {/* {
+        user ? 
+          <div className='w-full h-full flex flex-row justify-center items-center'>
+            <div className='w-60 h-60 bg-gray-600 text-white text-lg mx-10  flex flex-col justify-center items-center'>
+              <h2>
+                Silver Membership
+              </h2>
+              <ModalPayment price={100} userRole={'SILVER'}/>            
+            </div>
+            <div className='w-60 h-60 bg-gray-600 text-white text-lg mx-10  flex flex-col justify-center items-center'>
+              <h2>
+                Gold Membership
+              </h2> 
+              <ModalPayment price={300} userRole={'GOLD'}/>             
+            </div>
+            <div className='w-60 h-60 bg-gray-600 text-white text-lg mx-10  flex flex-col justify-center items-center'>
+              <h2>
+                Platinum Membership
+              </h2>         
+              <ModalPayment price={550} userRole={'PLATINUM'}/>     
+            </div>
+          </div>
+          :
+          null
+        } */}
       </main>
     </>
   );

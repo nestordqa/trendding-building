@@ -58,7 +58,6 @@ const ContextProvider = ({ children } : Props) =>{
             onSuccess: ()=>{
                 let id = String(user?.sub?.slice(user?.sub.indexOf('|')+1, user.sub.length));
                 setUsuario(id)
-                console.log('User created successfully!')
             },
             onError: (error)=>{
                 console.log(error)

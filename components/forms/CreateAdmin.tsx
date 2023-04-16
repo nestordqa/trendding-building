@@ -1,60 +1,65 @@
 import React from 'react';
 import { NextComponentType } from 'next';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useMutation } from 'react-query';
-import { postAdmin } from '../../utils/admin';
-import { postAdmins } from '../../app/types'
+import { useForm } from 'react-hook-form';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { useUsers } from '../ContextProvider/ContextProvider';
+import { redirectionAlert, alerts } from '../../utils/alerts';
+import { updateStudent } from '../../utils/students';
+import { useRouter } from 'next/router';
 
 export const CreateAdmin : NextComponentType = () => {
+
+    const router = useRouter();
+    const { user } = useUser();
+    const userId = useUsers();
+
+    if(!user || !userId){
+        redirectionAlert({
+            icon: 'info',
+            title: '<strong>Inicio de sesion requerido</strong>',
+            html:
+                'Para solicitar una membresía y poder disfrutar de todas nuestras funcionalidades' +
+                ' te invitamos a iniciar sesion o crear una cuenta.',
+            confirmButtonText: 'Iniciar sesion',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+        });
+        setTimeout(()=>{
+            router.push('/api/auth/login')
+        }, 1000)
+    };
 
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset
-    } = useForm<postAdmins>({
-        defaultValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
-            email_verified: false,
-            gender: '',
-            birthday: '',
-            address: '',
-            phone: '',
-            city: '',
-            province: '',
-            country: '',
-            photo: '',
-            role: '',
-            updatedAt: null
-        },
-    });
-    const { mutate } = useMutation(postAdmin, {
-        onSuccess: () => {
-            alert('Usuario creado!')
-        }
-    });
+    } = useForm();
 
-    const onSubmit = async (data : postAdmins) => {
-        data = {...data};
-        mutate(data);
-        reset({
-            firstName: '',
-            lastName: '',
-            email: '',
-            email_verified: false,
-            gender: '',
-            birthday: '',
-            address: '',
-            phone: '',
-            city: '',
-            province: '',
-            country: '',
-            photo: '',
-            role: '',
-            updatedAt: null
-        })
+    const onSubmit = async (data : any) => {
+        let info = {
+            info: true
+        };
+        data = {...data, ...info};
+        updateStudent(data, userId)
+            .then((data)=>{
+                console.log(data)
+            })
+            .catch((err)=>{
+                console.log('There was an error: ' + err)
+            })
+        reset()
+        redirectionAlert({
+            icon: 'info',
+            title: '<strong>Usuario creado exitósamente</strong>',
+            html:
+                'Para solicitar una membresía y poder disfrutar de todas nuestras funcionalidades' +
+                ' te invitamos a ver nuestro listado de membresías.',
+            confirmButtonText: 'Ir al listado',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+        });
+        setTimeout(()=>{
+            router.push('/')
+        }, 1000)
     };
 
   return (
@@ -113,69 +118,6 @@ export const CreateAdmin : NextComponentType = () => {
                 ) : null}
             </div>
 
-            {/* EMAIL */}
-            <div className="flex flex-col gap-1 items-start justify-center">
-                <label htmlFor="email" className="label">
-                    Email:
-                </label>
-                <input
-                    placeholder="Apellido..."
-                    {...register('email', {
-                        required: true,
-                        maxLength: 20
-                    })}
-                    className="input"
-                />
-                {errors.email?.type === 'required' ? (
-                    <p className="text-red-500 text-xs italic">
-                        Email es obligatorio
-                    </p>
-                ) : null}
-                {errors.email?.type === 'maxLength' ? (
-                    <p className="text-red-500 text-xs italic">
-                        El email no puede contener mas de 20 caracteres
-                    </p>
-                ) : null}
-            </div>  
-
-            {/* EMAIL VERIFIED */}
-            <div className="flex flex-col gap-1 items-start justify-center">
-                <label htmlFor="email" className="label">
-                    Email:
-                </label>
-                <input
-                    {...register('email_verified', {
-                        required: true
-                    })}
-                    type='checkbox'
-                    className="checkbox"
-                />
-                {errors.email?.type === 'required' ? (
-                    <p className="text-red-500 text-xs italic">
-                        Tu email no ha sido verificado.
-                    </p>
-                ) : null}
-            </div>  
-
-            {/* BIRTHDAY */}
-            <div className="flex flex-col gap-1 items-start justify-center">
-                <label htmlFor="birthday" className="label">
-                    Fecha de nacimiento:
-                </label>
-                <input
-                    {...register('birthday', {
-                        required: true
-                    })}
-                    type='date'
-                    className="input"
-                />
-                {errors.email?.type === 'required' ? (
-                    <p className="text-red-500 text-xs italic">
-                        Email es obligatorio
-                    </p>
-                ) : null}
-            </div>     
-
             {/* GENERO */}
             <div className="flex gap-1 flex-col items-start justify-center">
                 <label htmlFor="gender" className="label">
@@ -199,28 +141,24 @@ export const CreateAdmin : NextComponentType = () => {
                 ) : null}
             </div>
 
-            {/* GENERO */}
-            <div className="flex gap-1 flex-col items-start justify-center">
-                <label htmlFor="role" className="label">
-                    Rol de admin:
+            {/* BIRTHDAY */}
+            <div className="flex flex-col gap-1 items-start justify-center">
+                <label htmlFor="birthday" className="label">
+                    Fecha de nacimiento:
                 </label>
-                <select
-                    // className="input"
-                    placeholder="Rol..."
-                    className="input"
-                    {...register('role', {
+                <input
+                    {...register('birthday', {
                         required: true
-                    })}>
-                    <option value="ADMIN">ADMINISTRADOR</option>
-                    <option value="POSTER">POSTER</option>
-                    <option value="DEVELOPER">DESARROLLADOR</option>
-                </select>
-                {errors.gender?.type === 'required' ? (
+                    })}
+                    type='date'
+                    className="input"
+                />
+                {errors.email?.type === 'required' ? (
                     <p className="text-red-500 text-xs italic">
-                        Género es obligatorio
+                        Email es obligatorio
                     </p>
                 ) : null}
-            </div>
+            </div>     
 
             {/* DESCRIPCION */}
             <div className="flex flex-col gap-1 items-start justify-center">
@@ -347,32 +285,7 @@ export const CreateAdmin : NextComponentType = () => {
                         El Pais no puede contener mas de 20 caracteres
                     </p>
                 ) : null}
-            </div>  
-
-            {/* photo */}
-            <div className="flex flex-col gap-1 items-start justify-center">
-                <label htmlFor="photo" className="label">
-                    Foto:
-                </label>
-                <input
-                    placeholder="Foto..."
-                    {...register('photo', {
-                        required: true,
-                        maxLength: 20
-                    })}
-                    className="input"
-                />
-                {errors.photo?.type === 'required' ? (
-                    <p className="text-red-500 text-xs italic">
-                        Foto es obligatorio
-                    </p>
-                ) : null}
-                {errors.photo?.type === 'maxLength' ? (
-                    <p className="text-red-500 text-xs italic">
-                        La foto no puede contener mas de 20 caracteres
-                    </p>
-                ) : null}
-            </div>  
+            </div>
 
             <button
                 type="submit"

@@ -180,9 +180,8 @@ model Review {
 
 model Payment {
   id          String          @id @default(uuid())
-  method      PaymentMethod   
+  method      String   
   amout       Float
-  interfaceId String
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   student     Student         @relation(fields: [studentId], references: [id])

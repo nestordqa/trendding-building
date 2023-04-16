@@ -5,21 +5,27 @@ import {
   QueryClientProvider
 } from 'react-query';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { appWithTranslation } from 'next-i18next';
 import ContextProvider from '../components/ContextProvider/ContextProvider';
+import LanguagesProvider from '../components/ContextProvider/LanguagesProvider';
 
 const client = new QueryClient()
 
-export default function App({ 
+const App = ({ 
   Component, 
   pageProps
-}: AppProps) {
+}: AppProps) =>{
   return( 
-    <UserProvider>
-      <QueryClientProvider client={client}>
-        <ContextProvider>
-          <Component {...pageProps} />
-        </ContextProvider>
-      </QueryClientProvider>
-    </UserProvider>
+    <LanguagesProvider>
+      <UserProvider>
+        <QueryClientProvider client={client}>
+          <ContextProvider>
+            <Component {...pageProps} />
+          </ContextProvider>
+        </QueryClientProvider>
+      </UserProvider>
+    </LanguagesProvider>
   )
-}
+};
+
+export default appWithTranslation(App);

@@ -1,15 +1,20 @@
 import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0/client';
-import { useEffect, useState } from 'react';
-import { getStudentByEmail, postStudent } from '../../utils/students';
-const AuthButton = () => {
+import Link from 'next/link';
+import { useT } from '../ContextProvider/LanguagesProvider';
+
+const AuthButton = (props:any) => {
 
     const {
         user,
         error,
         isLoading
-    } = useUser();    
+    } = useUser();  
+    
+    const t = useT();
+
     const router = useRouter();
+    const { asPath } = useRouter();
     if(user){
         return(
             <button 
@@ -24,12 +29,24 @@ const AuthButton = () => {
         return <div>Loading user...</div>
     }
     return(
-        <button 
-            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-            onClick={()=>router.push('/api/auth/login')}
-        >
-            Log In
-        </button>
+
+        <>
+            <Link href={asPath} locale={'es'}>
+                ES
+            </Link>
+            <Link href={asPath} locale={'en'}>
+                EN
+            </Link>
+            {
+                t.login
+            }
+        </>
+        // <button 
+        //     className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded text-xl"
+        //     onClick={()=>router.push('/api/auth/login')}
+        // >
+        //     {props.locales}
+        // </button>
     )
 }
 
