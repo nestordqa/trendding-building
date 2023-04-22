@@ -8,7 +8,12 @@ export default {
         resources: 'Recursos',
         memberships: 'Planes',
         about: 'Nosotros',
-        help: 'Ayuda'
+        help: 'Ayuda',
+        profile: 'Perfil',
+        favorites: 'Favoritos',
+        dashboard: 'Dashboard',
+        logout: 'Cerrar sesión',
+        login: 'Iniciar sesión'
     },
     courses:{
         courses: 'Pagina Cursos',

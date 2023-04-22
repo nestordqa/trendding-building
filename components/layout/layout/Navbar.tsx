@@ -2,7 +2,8 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from 'next/router';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import UserButton from './UserButton';
 import {
   FaFacebookF,
   FaTwitter,
@@ -11,23 +12,51 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { useQuery } from 'react-query'
+import { useUsers } from '@components/components/ContextProvider/ContextProvider'
 import { useT } from "@components/components/ContextProvider/LanguagesProvider";
-import logo from '../../../public/images/testing-logo.jpg'
+import logo from '../../../public/images/testing-logo.jpg';
+
+const getUserById = async(id : String) =>{
+  const response = await fetch(`http://localhost:3000/api/users/${id}`);
+  const user = await response.json();
+  
+  if(!user){
+      return 'There is no data';
+  };
+  return user;
+};
 
 export const Navbar = () => {
 
+    const usuario = useUsers();
+    const { user } = useUser();
     const t = useT();
     const [navbar, setNavbar] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [picture, setPicture] = useState('');
+
     const router = useRouter();
     const { asPath, locale } = useRouter();
-  
-  const icon = {
-    fontSize: "24px",
-    color: "#043959",
-    marginLeft: "8px",
-    marginRigth: "8px",
-  };
 
+    let id: string = ''
+    if (user && user.sub && usuario) {
+        id = usuario
+    }
+    const { data: dbUser, isLoading } = useQuery(['user', id], () =>
+        getUserById(id)
+    )
+
+    useEffect(() => {
+      if (!isLoading && dbUser) {
+        setName(dbUser.firstName || user?.name);
+        setEmail(dbUser.email || user?.email);
+        setPicture(dbUser.photo || user?.picture);
+      }
+  }, [isLoading])
+  
   return (
     <nav className="w-full bg-white text-dark shadow fixed h-28 z-50">
       <div className="justify-around px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 mt-4">
@@ -120,8 +149,20 @@ export const Navbar = () => {
             </ul>
           </div>
         </div>
-        <div className="hidden space-x-2 md:flex md:flex-row md:mt-2">
-            USUARIO
+        <div className="ml-2">
+          {!user ? (
+              <div>
+                <Link href="/api/auth/login" className="navbarLink m-0 w-max">
+                  {t.navbar.login}
+                </Link>
+              </div>
+          ) : (
+              <UserButton
+                userName={name ?? ''}
+                userEmail={email ?? ''}
+                userPicture={picture ?? ''}
+              />
+          )}
         </div>
       </div>
     </nav>
