@@ -13,7 +13,8 @@ export default {
         favorites: 'Favoritos',
         dashboard: 'Dashboard',
         logout: 'Cerrar sesión',
-        login: 'Iniciar sesión'
+        login: 'Iniciar sesión',
+        loading: 'Cargando usuario...'
     },
     usersForm:{
         updateData: '¡Actualiza tus datos!',

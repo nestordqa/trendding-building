@@ -153,7 +153,7 @@ const LeftNavbar: any = () => {
                     <ul>
                         <li
                             className='dashboardButton'>
-                            <Link href={'/profile/#'} className="dashboardLinks">
+                            <Link href={'/dashboard/mycourses'} className="dashboardLinks">
                                 {t.leftNav.myCourses}
                             </Link>
                         </li>

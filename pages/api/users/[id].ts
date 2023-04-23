@@ -9,15 +9,27 @@ export default async function users( req : NextApiRequest, res : NextApiResponse
         case 'GET':
             try{
                 if(id){
-                    const admin = await prisma.user.findUnique({
+                    let data;
+                    const user = await prisma.user.findUnique({
                         where:{
                             id: String(id)
                         }
                     });
-                    if(admin){
-                        return res.status(200).json(admin);
+                    if(user){
+                        const student = await prisma.student.findUnique({
+                            where:{
+                                id: String(id)
+                            }
+                        });
+                        if(student){
+                            data = {
+                                ...user,
+                                student: student
+                            }
+                            return res.status(200).json(data);
+                        }
                     };
-                    if(!admin){
+                    if(!user){
                         return res.status(404).json({message: 'User does not exist!'})
                     };
                 };
@@ -27,15 +39,48 @@ export default async function users( req : NextApiRequest, res : NextApiResponse
         break;
         
         case 'PUT':
-            const data = req.body;
+            const {
+                info,
+                firstName,
+                lastName,
+                email,
+                gender,
+                birthday,
+                address,
+                phone,
+                city,
+                province,
+                photo,
+                userRole,
+                active
+            } = req.body
+            const obj ={
+                firstName,
+                lastName,
+                email,
+                gender,
+                birthday,
+                address,
+                phone,
+                city,
+                province,
+                photo,
+                userRole,
+                active
+            };
             try{
-                const admin = await prisma.user.update({
-                    where:{
-                        id: String(id)
-                    },
-                    data
-                });
-                res.status(200).json(admin);
+                let datos ={};
+                for(const [key, value] of Object.entries(obj)){
+                    let mini = {[key]: value};
+                    if(value !== ''){                        
+                        datos = {...datos, ...mini}
+                    }
+                };
+                const user = await prisma.user.update({
+                    where: { id: String(id) },
+                    data: {...datos}
+                })
+                    res.status(200).json(user);
             }catch(err){
                 return res.status(401).json({error: err})
             };

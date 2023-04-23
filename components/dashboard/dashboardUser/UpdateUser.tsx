@@ -1,15 +1,18 @@
 import { NextComponentType } from 'next';
 import React from "react";
+import { useRouter } from 'next/router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import image from '../../../public/images/testing-logo.jpg'
 import axios from 'axios';
 import Image from 'next/image'
-import { alerts } from '../../../utils/alerts';
+import { redirectionAlert } from '../../../utils/alerts';
 import { useUsers } from '@components/components/ContextProvider/ContextProvider';
 import { useT } from "@components/components/ContextProvider/LanguagesProvider";
 
 
 const UserUpdate: NextComponentType = () => {
+
+    const router = useRouter();
     interface UserUpdate {};
     const userId = useUsers();
     const t = useT();
@@ -37,12 +40,15 @@ const UserUpdate: NextComponentType = () => {
             console.log('User was not updated!!!')
         }
         reset()
-        alerts({
-            icon: "info",
-            title: "<strong>Email</strong>",
-            text: "Datos actualizados correctamente",
-            toast: true,
-          });
+        redirectionAlert({
+            icon: 'info',
+            title: '<strong>Datos actualizados con éxito</strong>',
+            confirmButtonText: 'Ok!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+        });
+        setTimeout(()=>{
+            router.push('/profile')
+        }, 1000)
     }
 
     return (

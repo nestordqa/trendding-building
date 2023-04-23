@@ -14,6 +14,7 @@ export default {
         dashboard: 'Dashboard',
         logout: 'Logout',
         login: 'Login',
+        loading: 'Loading user...'
     },
     usersForm:{
         updateData: 'Update your info!',

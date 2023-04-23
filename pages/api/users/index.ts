@@ -44,18 +44,8 @@ export default async function users( req : NextApiRequest, res : NextApiResponse
                 const newUser = await prisma.user.upsert({
                     where: { id: id },
                     update: {
-                        info,
-                        firstName,
-                        lastName,
                         email,
                         email_verified,
-                        gender,
-                        birthday,
-                        address,
-                        phone,
-                        city,
-                        province,
-                        country,
                         photo,
                         updatedAt: new Date()
                     },
