@@ -30,6 +30,45 @@
   .checkbox {
       @apply appearance-none h-4 w-4 border border-slate-400 bg-white rounded-full checked:bg-blue-50 hover:border-slate-600 checked:border-blue-100 focus:outline-none focus:text-blue-50 transition duration-200 cursor-pointer;
   }
+  .dashboardButton {
+    @apply my-2
+    px-3 
+    py-3 
+    text-blue-800
+    font-Rubik
+    text-sm
+    rounded-md flex items-center gap-2
+    cursor-pointer
+    font-medium
+    hover:bg-blue-800 hover:text-blue-50
+    transition ease-linear delay-100
+    lg:px-4 lg:py-3 lg:text-xl;
+}
+
+.dashboardSideTitle {
+    @apply font-Rubik
+    font-medium
+    text-blue-800
+    border-b
+    border-b-blue-300
+    px-2 py-1
+    md:text-sm;
+}
+
+.dashboardLinks {
+    @apply w-full md:text-sm;
+}
+
+.navbarLink {
+    @apply block 
+    mt-4 mr-4
+    transition-all
+    font-Rubik
+    uppercase
+    font-medium
+    hover:text-blue-800
+    lg:inline-block lg:mt-0;
+}
 }
 
 /* ===== Scrollbar CSS ===== */

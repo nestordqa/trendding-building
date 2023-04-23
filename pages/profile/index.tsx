@@ -1,15 +1,13 @@
-import react from 'react';
-import {NextPage} from 'next';
-import { CreateAdmin } from '@components/components/forms/CreateAdmin';
-import { useRouter } from 'next/router';
+import { DashboardLayout, Profile } from '@components/components/dashboard';
+import { NextPage } from 'next'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 
-const Profile : NextPage= () =>{
-
-    return(
-        <div className='w-screen h-screen bg-grey-500 flex flex-col justify-center items-center'>
-            <CreateAdmin/>
-        </div>
+const UserProfile: NextPage = withPageAuthRequired(() => {
+    return (
+        <DashboardLayout title="Mi Perfil">
+            <Profile />
+        </DashboardLayout>
     )
-};
+})
 
-export default Profile;
+export default UserProfile
