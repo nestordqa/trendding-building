@@ -4,15 +4,15 @@ import {
     getUser
 } from '../app/types';
 
-export const getStudent = async() =>{
+export const getUsers = async() =>{
     const response = await fetch('http://localhost:3000/api/users');
     const data = await response.json();
-    const students = await data.filter((student : getUser, _idx : number)=> student.userRole === 'STUDENT')
+    const users = await data.filter((student : getUser, _idx : number)=> student.userRole === 'STUDENT')
     
-    if(!students){
+    if(!users){
         return 'There is no data';
     };
-    return students;
+    return users;
 };
 
 export const getStudentById = async(id : String) =>{

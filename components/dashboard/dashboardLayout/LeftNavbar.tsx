@@ -40,7 +40,7 @@ const LeftNavbar: any = () => {
 
     useEffect(() => {
         if (!isLoading && dbUser && usuario) {
-            if (dbUser.role === 'ADMIN') {
+            if (dbUser.userRole === 'ADMIN') {
                 setIsAdmin(true)
                 return
             }

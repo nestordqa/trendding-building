@@ -31,6 +31,7 @@ const UserUpdate: NextComponentType = () => {
             info: true,
             updatedAt: new Date()
         }
+        console.log(datos, 'Soy datos')
         const response = await axios.put(`http://localhost:3000/api/users/${userId}`, datos);
         const user = await response.data;
         if(user){
@@ -229,7 +230,7 @@ const UserUpdate: NextComponentType = () => {
                 />
                 {errors.country?.type === 'maxLength' ? (
                     <p className="text-red-500 text-xs italic">
-                        {t.usersForm.city}
+                        {t.usersForm.tooLarge}
                     </p>
                 ) : null}
             </div>

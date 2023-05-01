@@ -28,6 +28,9 @@ export default async function users( req : NextApiRequest, res : NextApiResponse
                             }
                             return res.status(200).json(data);
                         }
+                        if(!student){
+                            return res.status(200).json(user);
+                        }
                     };
                     if(!user){
                         return res.status(404).json({message: 'User does not exist!'})
@@ -50,6 +53,7 @@ export default async function users( req : NextApiRequest, res : NextApiResponse
                 phone,
                 city,
                 province,
+                country,
                 photo,
                 userRole,
                 active
@@ -64,6 +68,7 @@ export default async function users( req : NextApiRequest, res : NextApiResponse
                 phone,
                 city,
                 province,
+                country,
                 photo,
                 userRole,
                 active

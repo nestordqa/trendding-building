@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useUsers } from '../ContextProvider/ContextProvider';
 import { redirectionAlert, alerts } from '../../utils/alerts';
-import { updateStudent } from '../../utils/students';
+import { updateStudent } from '../../utils/users';
 import { useRouter } from 'next/router';
 
 export const CreateAdmin : NextComponentType = () => {

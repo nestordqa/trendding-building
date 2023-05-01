@@ -1,3 +1,5 @@
+import { Student } from "@prisma/client";
+
 export interface postUser {
     firstName: string,
     lastName: string,
@@ -14,6 +16,16 @@ export interface postUser {
     userRole: string,
     updatedAt: Date | null    
 }
+export interface Transaction {
+    id:        string;
+    method:    string;
+    amount:    number;
+    createdAt: string;
+    updatedAt: string;
+    studentId:    string;
+    student:   Student;
+    membership: string;
+  }
 
 export interface getUser {
     firstName: string,

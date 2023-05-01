@@ -5,7 +5,7 @@ import Fade from '@mui/material/Fade'
 import Checkout from './Checkout'
 import { useQuery } from 'react-query'
 import { redirectionAlert } from '../../utils/alerts';
-import { getStudentById } from '../../utils/students'
+import { getStudentById } from '../../utils/users'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { useEffect, useState } from 'react'
 import { Elements } from '@stripe/react-stripe-js'

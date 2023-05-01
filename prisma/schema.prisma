@@ -181,7 +181,7 @@ model Review {
 model Payment {
   id          String          @id @default(uuid())
   method      String   
-  amout       Float
+  amoun       Float
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
   student     Student         @relation(fields: [studentId], references: [id])
