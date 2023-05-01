@@ -16,6 +16,13 @@ interface Data {
   dat: number[],
 }
 
+interface info {
+  wood: number,
+  silver: number,
+  gold: number,
+  platinum: number
+};
+
 const MembershipsMoreSold: NextPage = () => {
 
   const {
@@ -28,7 +35,7 @@ const MembershipsMoreSold: NextPage = () => {
   const mesActual = fecha.getMonth() + 1 > 9 ? fecha.getMonth() + 1 : `0${fecha.getMonth() + 1}`;
   const añoActual = fecha.getFullYear()
 
-  let info: any = {
+  let info: info = {
     wood: 0,
     silver: 0,
     gold: 0,
@@ -55,7 +62,7 @@ const MembershipsMoreSold: NextPage = () => {
 
   const data = [info.wood, info.silver, info.gold, info.platinum];
   let higher = data.sort((a,b)=>a-b);
-  higher = higher[0];
+  let highest = higher[0];
   let datos = {
     title: "Total vendido en $ por membresía",
     bridge: "vendidas este mes",
@@ -70,8 +77,8 @@ const MembershipsMoreSold: NextPage = () => {
 
   return (
     <div>
-      <DoughnutGraphic key={2} dat={...datos}/>
-      <div><h3>El producto mas vendidos es: {higher}</h3></div>
+      {/* <DoughnutGraphic key={2} dat={...datos}/> */}
+      <div><h3>El producto mas vendidos es: {highest}</h3></div>
     </div>
   )
 }

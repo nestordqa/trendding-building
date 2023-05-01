@@ -6,9 +6,9 @@ import {
 
 export const getUsers = async() =>{
     const response = await fetch('http://localhost:3000/api/users');
-    const data = await response.json();
-    const users = await data.filter((student : getUser, _idx : number)=> student.userRole === 'STUDENT')
-    
+    const users = await response.json();
+    // const users = await data.filter((student : getUser, _idx : number)=> student.userRole === 'STUDENT')
+
     if(!users){
         return 'There is no data';
     };

@@ -15,13 +15,14 @@ const RegisterUser: NextPage = () => {
   function getRegister() {
     if (isSuccess) {
       const info: number[] = [];
-        let registeredCurrentMont: getUser[] = users.filter((u: getUser) =>
-          u.createdAt?.getMonth() === fecha.getMonth()
+        let registeredCurrentMont: getUser[] = users.filter((usr: getUser) =>
+        Number(String(usr.createdAt)[5] + String(usr.createdAt)[6])-1 === fecha.getMonth()
         );
         info.push(registeredCurrentMont.length);
 
-        let registeredCurrentYear: getUser[] = users.filter((u: getUser) =>
-        u.createdAt?.getFullYear() === fecha.getFullYear()
+        let registeredCurrentYear: getUser[] = users.filter((usr: getUser) =>
+        Number(String(usr.createdAt)[0] + String(usr.createdAt)[1] + String(usr.createdAt)[2] + String(usr.createdAt)[3]) === añoActual
+
         );
         info.push(registeredCurrentYear.length)
 

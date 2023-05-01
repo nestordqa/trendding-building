@@ -75,7 +75,7 @@
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: #308253 #ecf8f1;
+  scrollbar-color: #496cc4 #ecf8f1;
   scroll-behavior: smooth;
 }
 
@@ -89,7 +89,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #308253;
+  background-color: #496cc4;
   border-radius: 10px;
   border: 2px solid #ffffff;
 }
