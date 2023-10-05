@@ -6,7 +6,8 @@
 
 *{
   padding: 0;
-  margin: 0
+  margin: 0;
+  background-color: #191619
 }
 
 @layer components {
@@ -75,7 +76,7 @@
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: #496cc4 #ecf8f1;
+  scrollbar-color: #C746FF #191619;
   scroll-behavior: smooth;
 }
 
@@ -85,13 +86,13 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: #ecf8f1;
+  background: #191619;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #496cc4;
+  background-color: #C746FF;
   border-radius: 10px;
-  border: 2px solid #ffffff;
+  border: 2px solid #191619;
 }
 
 /*************************** BUTTON CART ***************************/

@@ -4,9 +4,10 @@ export default {
         home_page: 'Inicio'
     },
     navbar:{
-        courses: 'Cursos',
+        inicio: 'Inicio',
         resources: 'Recursos',
-        memberships: 'Planes',
+        memberships: 'Membresia',
+        resources: 'Recursos',
         about: 'Nosotros',
         help: 'Ayuda',
         profile: 'Perfil',
@@ -14,7 +15,8 @@ export default {
         dashboard: 'Dashboard',
         logout: 'Cerrar sesión',
         login: 'Iniciar sesión',
-        loading: 'Cargando usuario...'
+        loading: 'Cargando usuario...',
+        start: 'Comenzar'
     },
     usersForm:{
         updateData: '¡Actualiza tus datos!',

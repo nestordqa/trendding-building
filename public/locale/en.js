@@ -5,8 +5,9 @@ export default {
     },
     navbar:{
         courses: 'Courses',
+        inicio: 'Home',
         resources: 'Resources',
-        memberships: 'Memberships',
+        memberships: 'Membership',
         about: 'About us',
         help: 'Help',
         profile: 'Profile',
@@ -14,7 +15,8 @@ export default {
         dashboard: 'Dashboard',
         logout: 'Logout',
         login: 'Login',
-        loading: 'Loading user...'
+        loading: 'Loading user...',
+        start: 'Start'
     },
     usersForm:{
         updateData: 'Update your info!',

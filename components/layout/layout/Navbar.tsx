@@ -16,7 +16,8 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import { useQuery } from 'react-query'
 import { useUsers } from '@components/components/ContextProvider/ContextProvider'
 import { useT } from "@components/components/ContextProvider/LanguagesProvider";
-import logo from '../../../public/images/testing-logo.jpg';
+import logo from '../../../public/images/logo_trendding.png';
+import styles from '../../../styles/Navbar.module.css';
 
 const getUserById = async(id : String) =>{
   const response = await fetch(`http://localhost:3000/api/users/${id}`);
@@ -58,20 +59,31 @@ export const Navbar = () => {
   }, [isLoading])
   
   return (
-    <nav className="w-full bg-white text-dark shadow fixed h-28 z-50">
-      <div className="justify-around px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 mt-4">
+    <nav className="w-full bg-black-50 text-white shadow fixed h-28 z-50">
+      <div className="justify-around px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 mt-4  border-pink-50 border rounded-3xl z-50">
         <div>
-          <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <Link href="/">
+          <div className="flex flex-row items-center justify-between py-3 md:py-5 md:block">
+            <Link href="/"
+                style={{
+                    display: `flex`,
+                    justifyContent: `center`,
+                    alignItems: `center`,
+                    flexDirection: `row`
+                }}            
+            >
               <Image
                 src={logo}
                 style={{
-                  width: "200px",
-                  height: "37.5px",
+                  width: "49.09px",
+                  height: "56.68px",
                 }}
                 alt='Trendding App'
               />
+            <span className="text-3xl font-medium">
+              Trendding
+            </span>
             </Link>
+
             <div className="md:hidden">
               <button
                 className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
@@ -116,24 +128,21 @@ export const Navbar = () => {
               navbar ? "block" : "hidden"
             }`}
           >
-            <ul className="flex flex-col justify-end items-center p-4 w-auto h-3/4 space-y-4 opacity-50 md:flex md:flex-row md:w-auto md:h-full md:space-x-6 md:space-y-0 md:p-0 md:opacity-100 mt-2 bg-white">
+            <ul className="flex flex-col justify-center ml-16 items-center p-8 w-auto h-3/4 space-y-4 opacity-50 md:flex md:flex-row md:w-auto md:h-full md:space-x-12 md:space-y-0 md:p-0 md:opacity-100 mt-2">
                 <li className="text-dark hover:text-darkBlue font-bold md:font-medium text-base">
-                <Link href="/courses">{t.navbar.courses}</Link>
+                <Link href="/courses">{t.navbar.inicio}</Link>
                 </li>
                 <li className="text-dark hover:text-darkBlue font-bold md:font-medium text-base">
-                <Link href="/resources">{t.navbar.resources}</Link>
+                <Link href="/resources">{t.navbar.memberships}</Link>
                 </li>
                 <li className="text-dark hover:text-darkBlue font-bold md:font-medium text-base">
-                <Link href="/memberships">{t.navbar.memberships}</Link>
+                <Link href="/memberships">{t.navbar.resources}</Link>
                 </li>
                 <li className="text-dark hover:text-darkBlue font-bold md:font-medium text-base">
-                <Link href="/about">{t.navbar.about}</Link>
-                </li>
-                <li className="text-dark hover:text-darkBlue font-bold md:font-medium text-base">
-                <Link href="/help">{t.navbar.help}</Link>
+                <Link href="/about">{t.navbar.help}</Link>
                 </li>
                 <li>
-                <div className="mt-3 space-x-4 flex flex-row w-full justify-center items-center">
+                {/* <div className="mt-3 space-x-4 flex flex-row w-full justify-center items-center">
                     {
                         locale === 'en' ?
                             <Link href={asPath} locale={'es'}>
@@ -144,7 +153,7 @@ export const Navbar = () => {
                                 EN
                             </Link>
                     }
-                </div>
+                </div> */}
               </li>
             </ul>
           </div>
@@ -152,8 +161,15 @@ export const Navbar = () => {
         <div className="ml-2">
           {!user ? (
               <div>
-                <Link href="/api/auth/login" className="navbarLink m-0 w-max">
-                  {t.navbar.login}
+                <Link href="/api/auth/login" style={{textDecoration: 'none'}}>                  
+                    <button className={styles.button}>
+                        {t.navbar.login}
+                    </button>
+                </Link>
+                <Link href="/#" style={{textDecoration: 'none'}}>                  
+                    <button className={styles.buttonStart}>
+                        {t.navbar.start}
+                    </button>
                 </Link>
               </div>
           ) : (

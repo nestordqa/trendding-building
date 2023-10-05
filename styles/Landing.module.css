@@ -1,0 +1,102 @@
+.container {
+    height: 80%;
+    width: 84%;
+    border-radius: 1.5rem;
+    border: 1px solid #C746FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+.textContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 66%;
+    border-radius: 1.5rem;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-left: 50px;
+    margin-top: 20px;
+    width: 100%;
+    height: 40%;
+    font-size: 55px;
+    line-height: 60px;
+    font-weight: 700;
+    border-radius: 1.5rem;
+    letter-spacing: 2px;
+
+}
+
+.titleContainer span {
+    background: -webkit-linear-gradient(rgba(199,70,255,1), rgba(138,42,227,1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.finalPart {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 50px;
+    width: 100%;
+    height: 60%;
+    border-radius: 1.5rem;
+    padding-top: 20px;
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    width: 33%;
+    border-radius: 1.5rem;
+
+}
+.button {
+    padding: 10px 20px;
+    background: rgb(199,70,255);
+    background: linear-gradient(0deg, rgba(199,70,255,1) 0%, rgba(138,42,227,1) 48%);
+    border-radius: 30px;
+    height: 42px;
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-top: 40px;
+}
+
+.selecterContainer {
+    width: 220px;
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.selecterContainer div {
+    border-radius: 100%;
+    margin: 0px 5px;
+    width: 21px;
+    height: 21px;
+    border: 3px solid #C746FF;
+    transition: ease-in all .2s;
+}
+
+.selecterContainer div:hover {
+    background-color: #C746FF;
+}
