@@ -8,7 +8,7 @@
   padding: 0;
   margin: 0;
   background-color: #000000;
-  background-image: url('../public/images/Adjustment_desktop.png');
+  background-image: url('/images/Adjustment_desktop.png');
   background-size: 100vw;
   background-position: center;
   background-attachment: fixed;
@@ -258,7 +258,7 @@
       width: 768px;
   }
   * {
-    background-image: url('../public/images/Adjusment_mobile.png');
+    background-image: url('/images/Adjusment_mobile.png');
     background-size: 100vw;
     background-position: bottom;
     background-attachment: fixed;
