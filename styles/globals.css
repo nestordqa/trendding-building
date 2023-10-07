@@ -7,7 +7,12 @@
 *{
   padding: 0;
   margin: 0;
-  background-color: #191619
+  background-color: #000000;
+  background-image: url('../public/images/Adjustment_desktop.png');
+  background-size: 100vw;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat
 }
 
 @layer components {
@@ -248,9 +253,16 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   .swiper-container {
       width: 768px;
+  }
+  * {
+    background-image: url('../public/images/Adjusment_mobile.png');
+    background-size: 100vw;
+    background-position: bottom;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
   }
 }
 

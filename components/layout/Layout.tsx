@@ -14,8 +14,8 @@ const Layout = ({children, title, content}:any)=>{
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar/>
-      <main className='w-full flex flex-1 flex-wrap justify-center items-center mx-auto h-auto relative pt-28'>
+      {/* <Navbar/> */}
+      <main className='bg-black-50 w-full flex flex-1 flex-wrap justify-center items-center mx-auto h-auto relative'>
         {children}
       </main>
     </>

@@ -36,19 +36,19 @@ const courses = async( req : NextApiRequest, res : NextApiResponse )=>{
                 if(!tittle || !description || !photo || !courseRole){
                     return res.status(401).json({error: 'Missing data!'})
                 }else{
-                    const newCourse = await prisma.course.create({
-                        data:{
-                            tittle,
-                            description,
-                            photo,
-                            subject,
-                            courseRole,
-                            active: true,
-                            createdAt: new Date(),
-                            updatedAt: new Date()
-                        }
-                    });
-                    return res.status(201).json(newCourse);
+                    // const newCourse = await prisma.course.create({
+                    //     data:{
+                    //         // tittle,
+                    //         // description,
+                    //         // photo,
+                    //         // subject,
+                    //         // courseRole,
+                    //         // active: true,
+                    //         // createdAt: new Date(),
+                    //         // updatedAt: new Date()
+                    //     }
+                    // });
+                    // return res.status(201).json(newCourse);
                 }
             }catch(error){
                 res.status(401).json({error: error})

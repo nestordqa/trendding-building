@@ -3,7 +3,7 @@ import React from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Link from 'next/link';
 import Image from 'next/image'
-import IsoGreen from '@components/public/images/testing-logo.jpg';
+import IsoGreen from '@components/public/images/logo_trendding.png';
 import { useQuery } from 'react-query';
 import { useUsers } from '@components/components/ContextProvider/ContextProvider';
 import { useT } from "@components/components/ContextProvider/LanguagesProvider";

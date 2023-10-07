@@ -2,7 +2,7 @@ import { NextComponentType } from 'next';
 import React from "react";
 import { useRouter } from 'next/router';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import image from '../../../public/images/testing-logo.jpg'
+import image from '../../../public/images/logo_trendding.png'
 import axios from 'axios';
 import Image from 'next/image'
 import { redirectionAlert } from '../../../utils/alerts';

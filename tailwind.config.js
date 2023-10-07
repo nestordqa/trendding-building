@@ -27,7 +27,7 @@ module.exports = {
           50: "#00416A"
         },
         black: {
-          50: "#191619",
+          50: "#000000",
         },
         red: {
           50: "#FF0000",
@@ -39,7 +39,10 @@ module.exports = {
           50: '#C746FF'
         }
       },
-      backgroundImage: {},
+      backgroundImage: {
+        'bg_mobile': "url('../public/images/Adjusment_mobile.png')",
+        'bg_desktop': "url('public/images/Adjusment_desktop.png')"
+      },
     },
   },
   plugins: [],

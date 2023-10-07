@@ -50,17 +50,17 @@ export const Navbar = () => {
         getUserById(id)
     )
 
-    useEffect(() => {
-      if (!isLoading && dbUser) {
-        setName(dbUser.firstName || user?.name);
-        setEmail(dbUser.email || user?.email);
-        setPicture(dbUser.photo || user?.picture);
-      }
-  }, [isLoading])
+  //   useEffect(() => {
+  //     if (!isLoading && dbUser) {
+  //       setName(dbUser.firstName || user?.name);
+  //       setEmail(dbUser.email || user?.email);
+  //       setPicture(dbUser.photo || user?.picture);
+  //     }
+  // }, [isLoading])
   
   return (
-    <nav className="w-full bg-black-50 text-white shadow fixed h-28 z-50">
-      <div className="justify-around px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 mt-4  border-pink-50 border rounded-3xl z-50">
+    <nav className="w-0 bg-black-50 text-white shadow fixed h-0 z-50">
+      {/* <div className="justify-around px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 mt-4  border-pink-50 border rounded-3xl z-50">
         <div>
           <div className="flex flex-row items-center justify-between py-3 md:py-5 md:block">
             <Link href="/"
@@ -154,7 +154,7 @@ export const Navbar = () => {
                             </Link>
                     }
                 </div> */}
-              </li>
+              {/* </li>
             </ul>
           </div>
         </div>
@@ -180,7 +180,7 @@ export const Navbar = () => {
               />
           )}
         </div>
-      </div>
+      </div> */}
     </nav>
   );
 };

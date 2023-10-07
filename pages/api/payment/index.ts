@@ -43,7 +43,7 @@ export default async function handler(
             data:{
                 id: payment_intent?.id,
                 method: 'STRIPE',
-                amout: totalPrice,
+                amoun: totalPrice,
                 studentId: userId,
                 membership: userRole
             }

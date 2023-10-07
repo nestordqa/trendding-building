@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import IsoGreen from '@components/public/images/testing-logo.jpg';
+import IsoGreen from '@components/public/images/logo_trendding.png';
 import { AiFillAppstore } from 'react-icons/ai'
 import { FaUser, FaPaw, FaSignOutAlt, FaShoppingBag } from 'react-icons/fa'
 import { useRouter } from 'next/router'
